@@ -73,19 +73,8 @@ class _BodyLoginUserState extends State<BodyLoginUserWidget> {
                 SecureStorage().delete('name');
                 SecureStorage().delete('password');
               }
-              showDialog(context: context, builder: (context){
-                return DialogWidget(
-                  title: 'Thành công',
-                  icon: AppAssets.icoDialogSuccess,
-                  cancelButton: false,
-                  content: 'Bạn đã đăng nhập thành công',
-                  function: (){
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (_) => MainTabScreen()));
-                  },
-                );
-              }
-              );
+              // Navigator.of(context).pushReplacement(MaterialPageRoute(
+              //     builder: (_) => MainTabScreen()));
             });
           } else if (value == Status.error) {
             WidgetsBinding.instance.addPostFrameCallback((_) {

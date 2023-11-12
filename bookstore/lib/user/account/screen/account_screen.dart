@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../base/widgets/app_bar_widget.dart';
+
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
 
@@ -10,10 +12,9 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tài khoản'),
-      ),
+    return AppBarWidget(
+      tittle: Text('Tài khoản'),
+      child: Container(),
     );
   }
 }

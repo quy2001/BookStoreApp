@@ -73,7 +73,8 @@ class _TopPicksWidgetState extends State<TopPicksWidget> {
               width: size.width,
               height: size.width * 0.8,
               child: CarouselSlider.builder(
-                itemCount: provider.topPickArr.length,
+                // itemCount: provider.topPickArr.length,
+                itemCount: 5,
                 itemBuilder: (BuildContext context, int itemIndex,
                     int pageViewIndex) {
                   return builData(context,provider.topPickArr[itemIndex]);
@@ -97,53 +98,58 @@ class _TopPicksWidgetState extends State<TopPicksWidget> {
 Widget builData (BuildContext context, TopPick topPick){
   var size = MediaQuery.of(context).size;
   return SingleChildScrollView(
-    child: SizedBox(
-      width: size.width * 0.32,
-      child: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
+    child: GestureDetector(
+      onTap: (){
+        print('sách nè');
+      },
+      child: SizedBox(
+        width: size.width * 0.32,
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black38,
+                      offset: Offset(0, 4),
+                      blurRadius: 5,
+                    )
+                  ]),
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black38,
-                    offset: Offset(0, 4),
-                    blurRadius: 5,
-                  )
-                ]),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                topPick.cover,
-                width: size.width * 0.32,
-                height: size.width * 0.5,
-                fit: BoxFit.cover,
+                child: Image.network(
+                  topPick.cover,
+                  width: size.width * 0.32,
+                  height: size.width * 0.5,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
+            const SizedBox(
+              height: 15,
+            ),
+            Text(
+              // iObj["name"].toString(),
+              topPick.name,
+              maxLines: 3,
+              textAlign: TextAlign.center,
+              style: AppStyles.titleBook,
+            ),
+            // Text(
+            //   topPick.idAuthor.toString(),
+            //   style: AppStyles.subTitle,
+            //   maxLines: 1,
+            // )
+          MultiProvider(providers: [
+            ChangeNotifierProvider(
+                create: (context)=>AuthorByIdProvider(AuthorIdServices(DioOption().createDio()))),
+          ],
+            child:AuthorId(id: topPick.idAuthor),
           ),
-          const SizedBox(
-            height: 15,
-          ),
-          Text(
-            // iObj["name"].toString(),
-            topPick.name,
-            maxLines: 3,
-            textAlign: TextAlign.center,
-            style: AppStyles.titleBook,
-          ),
-          // Text(
-          //   topPick.idAuthor.toString(),
-          //   style: AppStyles.subTitle,
-          //   maxLines: 1,
-          // )
-        MultiProvider(providers: [
-          ChangeNotifierProvider(
-              create: (context)=>AuthorByIdProvider(AuthorIdServices(DioOption().createDio()))),
-        ],
-          child:AuthorId(id: topPick.idAuthor),
+          ],
         ),
-        ],
       ),
     ),
   );

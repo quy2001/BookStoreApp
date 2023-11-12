@@ -3,8 +3,8 @@ import 'package:bookstore/user/home/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../account/screen/account_screen.dart';
+import '../bookcase/screen/bookcase_screen.dart';
 import '../cart/screen/cart_screen.dart';
-import '../purchased_book/screen/purchased_book_screen.dart';
 import '../search_book/screen/search_book_screen.dart';
 
 class MainTabScreen extends StatefulWidget {
@@ -181,7 +181,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
                     minWidth: 30,
                     onPressed: () {
                       setState(() {
-                        currentScreen = PurchasedBookScreen();
+                        currentScreen = BookcaseScreen();
                         currentTab = 1;
                       });
                     },

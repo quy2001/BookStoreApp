@@ -48,6 +48,7 @@ dev_dependencies:
   dio: ^5.3.2
   carousel_slider: ^4.2.1
   flutter_rating_bar: ^4.0.1
+  refresh_loadmore: ^2.0.5
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

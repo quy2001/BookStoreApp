@@ -19,4 +19,7 @@ class AppStyles {
       TextStyle(fontSize: 13, color: AppColors.subTitleColorBG);
   static const TextStyle description =
   TextStyle(fontSize: 13, color: AppColors.subTitleColor);
+
+  static const TextStyle titleBookDetails = TextStyle(
+      fontWeight: FontWeight.w600, fontSize: 20, color: AppColors.titleColor);
 }

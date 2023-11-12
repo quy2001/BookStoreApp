@@ -27,31 +27,3 @@ class AuthorByIdProvider extends BaseProvider<AuthorIdServices> {
     }
   }
 }
-
-// import 'package:bookstore/base/controller/base_provider.dart';
-//
-// import 'package:dio/dio.dart';
-//
-// final Dio dio = Dio();
-// class AuthorByIdProvider extends BaseProvider<AuthorIdServices>{
-//   AuthorByIdProvider (AuthorIdServices service) : super(service);
-//     late Data data;
-//   Status statusAuthorid = Status.none;
-//   Future<void> getAuthorById(int id) async {
-//     try{
-//       startLoading((){
-//         statusAuthorid=Status.loading;
-//       });
-//       data = await service.getAuthorById(id);
-//       finishLoading((){
-//         statusAuthorid= Status.loaded;
-//       });
-//     }on DioException catch (e){
-//       messagesError = e.message ?? 'Có lỗi hệ thống';
-//       receivedError((){
-//         statusAuthorid = Status.error;
-//       });
-//     }
-//   }
-//
-// }

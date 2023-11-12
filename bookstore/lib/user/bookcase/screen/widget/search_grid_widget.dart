@@ -35,8 +35,8 @@ class _SearchGridWidgetState extends State<SearchGridWidget> {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(widget.sObj["img"].toString(),
-              width: size.width*0.25,
-              height: size.width*0.25*1.6,
+              width: size.width*0.23,
+              height: size.width*0.25*1.45,
               fit: BoxFit.cover,
             ),
           ),
