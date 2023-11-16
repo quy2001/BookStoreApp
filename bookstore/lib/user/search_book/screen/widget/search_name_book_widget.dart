@@ -1,6 +1,4 @@
-import 'package:bookstore/common/extenstion.dart';
 import 'package:bookstore/user/search_book/screen/widget/search_filter_widget.dart';
-import 'package:bookstore/user/search_book/screen/widget/search_force_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/values/colors.dart';
@@ -27,22 +25,6 @@ class _SearchNameBookWidgetState extends State<SearchNameBookWidget> {
       ),
       child: TextField(
         controller: txtSearch,
-        // onTap: () async {
-        //   await Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => SearchForceWidget(
-        //         didSearch: (sText) {
-        //           txtSearch.text = sText;
-        //           if (mounted) {
-        //             setState(() {});
-        //           }
-        //         },
-        //       ),
-        //     ),
-        //   );
-        //   endEditing();
-        // },
         onChanged: (value){
           setState(() {
             bookSearchProvider.search(value);

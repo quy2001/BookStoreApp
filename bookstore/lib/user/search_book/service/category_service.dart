@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 
-import 'package:bookstore/user/home/model/category_response.dart';
 
 import '../../../base/service/base_service.dart';
 import '../../../base/service/services_url.dart';
+import '../model/category_response.dart';
 
 class CategoryServices extends BaseService {
   CategoryServices(Dio client) : super(client);

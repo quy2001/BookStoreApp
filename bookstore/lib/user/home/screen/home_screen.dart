@@ -1,13 +1,7 @@
 import 'package:bookstore/base/service/dio_option.dart';
 import 'package:bookstore/common/values/colors.dart';
-import 'package:bookstore/user/home/controller/author_id_provider.dart';
-import 'package:bookstore/user/home/controller/author_provider.dart';
-import 'package:bookstore/user/home/controller/category_provider.dart';
 import 'package:bookstore/user/home/controller/top_picks_provider.dart';
 import 'package:bookstore/user/home/screen/widget/body_home_widget.dart';
-import 'package:bookstore/user/home/service/author_id_service.dart';
-import 'package:bookstore/user/home/service/author_service.dart';
-import 'package:bookstore/user/home/service/category_service.dart';
 import 'package:bookstore/user/home/service/top_picks_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
@@ -25,10 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-            create: (context)=>CategoryProvider(CategoryServices(DioOption().createDio()))),
-        ChangeNotifierProvider(
-            create: (context)=>AuthorProvider(AuthorService(DioOption().createDio()))),
         ChangeNotifierProvider(
             create: (context)=>TopPickProvider(TopPickServices(DioOption().createDio()))),
       ],

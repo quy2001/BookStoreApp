@@ -3,9 +3,7 @@ import 'package:bookstore/common/values/styles.dart';
 import 'package:bookstore/user/home/screen/widget/top_picks_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../main_tab/main_tab_screen.dart';
-import 'author_widget.dart';
 import 'best_seller_widget.dart';
-import 'category_widget.dart';
 
 class BodyHomeWidget extends StatefulWidget {
   const BodyHomeWidget({super.key});
@@ -83,9 +81,6 @@ class _BodyHomeWidgetState extends State<BodyHomeWidget> {
                       }, icon: Icon(Icons.menu))
                     ],
                   ),
-                  // SizedBox(
-                  //   height: size.width * 0.06,
-                  // ),
                   const TopPicksWidget(),
                   Container(
                     width: size.width,
@@ -107,8 +102,6 @@ class _BodyHomeWidgetState extends State<BodyHomeWidget> {
                           return BestSellerWidget(bObj:bObj);
                         }),
                   ),
-                  const CategoryWidget(),
-                  const AuthorWidget()
                 ],
               ),
             ],

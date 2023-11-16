@@ -1,7 +1,8 @@
 import 'package:bookstore/base/service/base_service.dart';
 import 'package:bookstore/base/service/services_url.dart';
-import 'package:bookstore/user/home/model/author_response.dart';
 import 'package:dio/dio.dart';
+
+import '../model/author_response.dart';
 class AuthorService extends BaseService{
   AuthorService (Dio client) : super(client);
   Future<List<Author>> getAuthor() async{

@@ -1,9 +1,10 @@
-import 'package:bookstore/user/home/model/category_response.dart';
-import 'package:bookstore/user/home/service/category_service.dart';
+
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
 import '../../../base/controller/base_provider.dart';
+import '../model/category_response.dart';
+import '../service/category_service.dart';
 
 
 final Dio dio = Dio();
@@ -19,6 +20,7 @@ class CategoryProvider extends BaseProvider<CategoryServices> {
         statusCategory = Status.loading;
       });
       categoryArr = await service.getCategory();
+      categoryArr.insert(0, Category(id: 0, name: "Tất cả"));
       finishLoading((){
         statusCategory = Status.loaded;
       });

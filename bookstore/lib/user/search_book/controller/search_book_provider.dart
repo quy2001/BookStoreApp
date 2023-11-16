@@ -2,7 +2,6 @@ import 'package:bookstore/base/controller/base_provider.dart';
 import 'package:bookstore/user/search_book/model/search_book_request.dart';
 import 'package:bookstore/user/search_book/service/book_service.dart';
 import 'package:dio/dio.dart';
-
 import '../model/search_books_response.dart';
 class SearchBookProvider extends BaseProvider<SearchBookServices>{
   SearchBookProvider(SearchBookServices service) : super(service);
@@ -46,9 +45,16 @@ class SearchBookProvider extends BaseProvider<SearchBookServices>{
     }
   }
 
-  void FilterAuthorCategory(int idAuthor, int idCategory){
-
+  void searchAuthCate(int idFAuthor, int idFCategory){
+    resetPage();
+    page = 1;
+    idAuthor = idFAuthor;
+    idCategory = idFCategory;
+    listBookDisplay=[];
+    getListBook();
   }
+
+
 
   Future<void> getListBook() async{
     resetStatus();

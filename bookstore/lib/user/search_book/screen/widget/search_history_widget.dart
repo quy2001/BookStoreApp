@@ -130,7 +130,7 @@ class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
                     ] ),
                     child: ElevatedButton(
                       onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (c)=> BookDetailScreen(id: widget.listBook.id,)));
+                            Navigator.push(context, MaterialPageRoute(builder: (c)=> BookDetailScreen(id: widget.listBook.id, titleBook:widget.listBook.name,)));
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,

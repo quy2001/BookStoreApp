@@ -11,6 +11,12 @@ import 'package:provider/provider.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import '../../../base/service/dio_option.dart';
 import 'package:provider/provider.dart';
+
+import '../controller/author_provider.dart';
+import '../controller/category_provider.dart';
+import '../service/author_service.dart';
+import '../service/category_service.dart';
+
 class SearchBookScreen extends StatefulWidget {
   const SearchBookScreen({super.key});
 
@@ -26,7 +32,11 @@ class _SearchBookScreenState extends State<SearchBookScreen> {
       providers: [
         ChangeNotifierProvider(
             create: (context) =>
-                SearchBookProvider(SearchBookServices(DioOption().createDio())))
+                SearchBookProvider(SearchBookServices(DioOption().createDio()))),
+        ChangeNotifierProvider(
+            create: (context)=>CategoryProvider(CategoryServices(DioOption().createDio()))),
+        ChangeNotifierProvider(
+            create: (context)=>AuthorProvider(AuthorService(DioOption().createDio()))),
       ],
       child: Scaffold(
         backgroundColor: AppColors.bgColor,

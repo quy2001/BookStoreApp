@@ -8,8 +8,9 @@ import '../../../base/service/dio_option.dart';
 import '../../../common/values/colors.dart';
 
 class BookDetailScreen extends StatefulWidget {
-  const BookDetailScreen({super.key, required this.id});
+  const BookDetailScreen({super.key, required this.id, required this.titleBook});
  final int id;
+ final String titleBook;
   @override
   State<BookDetailScreen> createState() => _BookDetailScreenState();
 }
@@ -27,7 +28,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         functionBottomButton: (){
           Navigator.pop(context);
         },
-        tittle: Text('Bơ đi mà sống'),
+        tittle: Text(widget.titleBook),
           haveBackButton: true,
           child: BodyBookDetailWidget(id: widget.id,)
       ),
