@@ -5,7 +5,6 @@ import 'package:bookstore/user/book_details/service/book_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../base/service/dio_option.dart';
-import '../../../common/values/colors.dart';
 
 class BookDetailScreen extends StatefulWidget {
   const BookDetailScreen({super.key, required this.id, required this.titleBook});

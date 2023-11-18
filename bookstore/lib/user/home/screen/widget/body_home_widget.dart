@@ -100,7 +100,8 @@ class _BodyHomeWidgetState extends State<BodyHomeWidget> {
                         itemBuilder: (context, index) {
                           var bObj = bestSellerArr[index] as Map? ?? {};
                           return BestSellerWidget(bObj:bObj);
-                        }),
+                        }
+                        ),
                   ),
                 ],
               ),
