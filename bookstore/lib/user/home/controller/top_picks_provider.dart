@@ -11,7 +11,11 @@ class TopPickProvider extends BaseProvider<TopPickServices> {
     try {
       startLoading();
       topPickArr = await service.getTopPick();
-      finishLoading();
+      if(topPickArr.isEmpty){
+        receivedNoData();
+      }else{
+        finishLoading();
+      }
     } on DioException catch (e) {
       messagesError = e.message ?? 'Có lỗi hệ thống';
       receivedError();

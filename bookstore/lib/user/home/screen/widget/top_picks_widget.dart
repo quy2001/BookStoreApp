@@ -137,11 +137,6 @@ Widget builData (BuildContext context, TopPick topPick){
               textAlign: TextAlign.center,
               style: AppStyles.titleBook,
             ),
-            // Text(
-            //   topPick.idAuthor.toString(),
-            //   style: AppStyles.subTitle,
-            //   maxLines: 1,
-            // )
           MultiProvider(providers: [
             ChangeNotifierProvider(
                 create: (context)=>AuthorByIdProvider(AuthorIdServices(DioOption().createDio()))),

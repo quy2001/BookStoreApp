@@ -39,9 +39,6 @@ class _BodySearchBookWidgetState extends State<BodySearchBookWidget> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       authorProvider.getAuthor(context);
     });
-
-    print("---------------${authorProvider.authorArr}");
-
     categoryProvider = Provider.of<CategoryProvider>(context,listen: false);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       categoryProvider.getCategory(context);

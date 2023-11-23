@@ -150,11 +150,11 @@ class DioOption {
   Future<void> getAccessToken(RequestOptions options) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString(('token') ?? "");
+      var token = prefs.getString(('token') ?? "");
      // print('-----------token: $token');
       if (prefs != null) {
-        options.headers.addAll({'x-authentication-token': '$token'});
-        // options.headers.addAll({'x-authentication-token': '0591b341c666f4d765b5d9f75995326a'});
+        options.headers.addAll({'x_authentication_token': '$token'});
+        // options.headers.addAll({'x-authentication-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoyMSwibmFtZSI6InF1eTEyMyIsImVtYWlsIjoicXV5QGdtYWlsLmNvbSJ9LCJpYXQiOjE3MDA3NTgxNzQsImV4cCI6MTcwMDc2MTc3NH0.h8dgu7TVBRCYyQTQaaBuGUf08DMqb5PWSJwnCIEkCIk'});
         // // options.headers["x-authentication-token"] = await getAccessToken();
       } else {}
     } catch (e) {}

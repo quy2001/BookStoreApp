@@ -7,8 +7,6 @@ import 'package:provider/provider.dart';
 import '../../../../base/controller/base_provider.dart';
 import '../../../../base/widgets/appbar_login_widget.dart';
 import '../../../../base/widgets/button_widget.dart';
-import '../../../../base/widgets/dialog_widget.dart';
-import '../../../main_tab/main_tab_screen.dart';
 import '../../service/secure_storage.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 

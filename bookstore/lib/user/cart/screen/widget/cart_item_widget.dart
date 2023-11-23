@@ -7,6 +7,8 @@ class CartItemWidget extends StatefulWidget {
   const CartItemWidget({super.key, required this.cObj});
   final Map cObj;
 
+  // int id;
+
   @override
   State<CartItemWidget> createState() => _CartItemWidgetState();
 }

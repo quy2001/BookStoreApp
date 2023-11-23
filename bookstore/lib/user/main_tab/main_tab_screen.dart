@@ -17,13 +17,6 @@ GlobalKey<ScaffoldState> sideMenuScaffoldKey = GlobalKey<ScaffoldState>();
 
 class _MainTabScreenState extends State<MainTabScreen> {
   int currentTab = 0;
-  // final List<Widget> tabs = [
-  //   HomeScreen(),
-  //   AccountScreen(),
-  //   CartScreen(),
-  //   PurchasedBookScreen(),
-  //   SearchBookScreen()
-  // ];
 
   final PageStorageBucket bucket = PageStorageBucket();
 
