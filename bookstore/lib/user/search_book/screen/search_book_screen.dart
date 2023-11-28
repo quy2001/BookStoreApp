@@ -1,4 +1,6 @@
 import 'package:bookstore/common/values/colors.dart';
+import 'package:bookstore/user/cart/controller/cart_provider.dart';
+import 'package:bookstore/user/cart/service/cart_service.dart';
 import 'package:bookstore/user/search_book/controller/search_book_provider.dart';
 import 'package:bookstore/user/search_book/screen/widget/body_search_book_widget.dart';
 import 'package:bookstore/user/search_book/screen/widget/search_filter_widget.dart';
@@ -37,6 +39,8 @@ class _SearchBookScreenState extends State<SearchBookScreen> {
             create: (context)=>CategoryProvider(CategoryServices(DioOption().createDio()))),
         ChangeNotifierProvider(
             create: (context)=>AuthorProvider(AuthorService(DioOption().createDio()))),
+        ChangeNotifierProvider(
+            create: (context)=>CartProvider(CartServices(DioOption().createDio()))),
       ],
       child: Scaffold(
         backgroundColor: AppColors.bgColor,

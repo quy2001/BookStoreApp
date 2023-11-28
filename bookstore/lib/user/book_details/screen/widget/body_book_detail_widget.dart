@@ -1,4 +1,3 @@
-import 'package:bookstore/base/controller/base_provider.dart';
 import 'package:bookstore/user/book_details/controller/book_provider.dart';
 import 'package:flutter/material.dart';
 

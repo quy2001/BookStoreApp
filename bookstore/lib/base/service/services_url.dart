@@ -11,5 +11,6 @@ class ServicesUrl{
   static const String postSearchBook = "$baseUrl/api/books/search";
   static const String postAddCart = "$baseUrl/api/cart/add";
   static const String getListCart = "$baseUrl/api/cart/getList";
+  static const String deleteCart = "$baseUrl/api/cart/delete";
 
 }

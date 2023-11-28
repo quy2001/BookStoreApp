@@ -1,21 +1,30 @@
+import 'package:bookstore/base/service/dio_option.dart';
 import 'package:bookstore/common/values/colors.dart';
 import 'package:flutter/material.dart';
+import '../../../../base/widgets/dialog_widget.dart';
+import '../../../../common/values/assets.dart';
 import '../../../../common/values/styles.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
+import 'package:provider/provider.dart';
 import '../../../book_details/screen/book_detail_screen.dart';
+import '../../../cart/controller/cart_provider.dart';
 import '../../model/search_books_response.dart';
 
 class SearchHistoryWidget extends StatefulWidget {
   const SearchHistoryWidget({super.key, required this.listBook});
   final SearchBook listBook;
-
-  // final Map srObj;
   @override
   State<SearchHistoryWidget> createState() => _SearchHistoryWidgetState();
 }
 
 class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
+
+  late CartProvider cartProvider;
+
+  void addCart (){
+    cartProvider = Provider.of<CartProvider>(context, listen: false);
+    cartProvider.addCart(context,widget.listBook.id);
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -155,7 +164,9 @@ class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
                             )
                           ]),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          addCart();
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
                             shadowColor: Colors.transparent),

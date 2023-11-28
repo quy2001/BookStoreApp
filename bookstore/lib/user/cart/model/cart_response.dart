@@ -33,12 +33,18 @@ class Cart {
   int idUser;
   int idBook;
   int status;
+  String bname;
+  int bprice;
+  String bimage;
 
   Cart({
     required this.id,
     required this.idUser,
     required this.idBook,
     required this.status,
+    required this.bname,
+    required this.bprice,
+    required this.bimage,
   });
 
   factory Cart.fromJson(Map<String, dynamic> json) => Cart(
@@ -46,6 +52,9 @@ class Cart {
     idUser: json["idUser"],
     idBook: json["idBook"],
     status: json["status"],
+    bname: json["bname"],
+    bprice: json["bprice"],
+    bimage: json["bimage"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -53,5 +62,8 @@ class Cart {
     "idUser": idUser,
     "idBook": idBook,
     "status": status,
+    "bname": bname,
+    "bprice": bprice,
+    "bimage": bimage,
   };
 }
