@@ -6,7 +6,7 @@ String categoryResponseToJson(CategoryResponse data) => json.encode(data.toJson(
 
 class CategoryResponse {
   int success;
-  List<Category> data;
+  List<Category>? data;
 
   CategoryResponse({
     required this.success,
@@ -15,12 +15,12 @@ class CategoryResponse {
 
   factory CategoryResponse.fromJson(Map<String, dynamic> json) => CategoryResponse(
     success: json["success"],
-    data: List<Category>.from(json["data"].map((x) => Category.fromJson(x))),
+    data: List<Category>.from((json["data"] ?? []).map((x) => Category.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "success": success,
-    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+    "data": List<dynamic>.from((data ?? []).map((x) => x.toJson())),
   };
 }
 

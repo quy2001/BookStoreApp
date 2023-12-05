@@ -133,7 +133,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                               ]),
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (c)=> BookDetailScreen(id: widget.listCart.idBook, titleBook:widget.listCart.bname,)));
+                              Navigator.push(context, MaterialPageRoute(builder: (c)=> BookDetailScreen(id: widget.listCart.idBook, titleBook:widget.listCart.bname, statusBook: false,)));
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,

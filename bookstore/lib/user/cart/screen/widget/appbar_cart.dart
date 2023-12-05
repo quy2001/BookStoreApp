@@ -4,11 +4,11 @@ import '../../../../common/values/colors.dart';
 import '../../model/cart_response.dart';
 
 class AppBarCartWidget extends StatefulWidget {
-  const AppBarCartWidget({super.key, required this.listCart, required this.itemSelections, required this.updateTotal, required this.onSelectAllChanged});
-  final List<bool> itemSelections;
-  final List<Cart> listCart;
-  final Function(List<Cart>) updateTotal;
-  final Function(bool) onSelectAllChanged; // Callback để cập nhật trạng thái "Tất cả"
+  const AppBarCartWidget({super.key});
+  // final List<bool> itemSelections;
+  // final List<Cart> listCart;
+  // final Function(List<Cart>) updateTotal;
+  // final Function(bool) onSelectAllChanged; // Callback để cập nhật trạng thái "Tất cả"
 
   @override
   State<AppBarCartWidget> createState() => _AppBarCartWidgetState();
@@ -21,28 +21,12 @@ class AppBarCartWidget extends StatefulWidget {
 }
 
 class _AppBarCartWidgetState extends State<AppBarCartWidget> {
-  late double totalPrice;
   late bool _selectAll;
   @override
   void initState() {
     super.initState();
-    totalPrice = calculateTotalPrice(widget.listCart);
     _selectAll = false;
   }
-
-  void updateTotal(List<Cart> selectedItems) {
-    setState(() {
-      totalPrice = calculateTotalPrice(selectedItems);
-    });
-  }
-  double calculateTotalPrice(List<Cart> selectedItems) {
-    double total = 0;
-    for (var cart in selectedItems) {
-      total += cart.bprice;
-    }
-    return total;
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -78,13 +62,9 @@ class _AppBarCartWidgetState extends State<AppBarCartWidget> {
                           onChanged: (bool? value) {
                             setState(() {
                               _selectAll = value ?? false;
-                              for (var i = 0; i < widget.itemSelections.length; i++) {
-                                widget.itemSelections[i] = _selectAll;
-                              }
-                              widget.onSelectAllChanged(_selectAll); // Gọi callback khi trạng thái "Tất cả" thay đổi
-                              widget.updateTotal(widget.listCart);
                             });
-                      }),
+                          }
+                      ),
                       Text('Tất cả',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16),),
                     ],
                   )
@@ -99,7 +79,7 @@ class _AppBarCartWidgetState extends State<AppBarCartWidget> {
                             style: DefaultTextStyle.of(context).style,
                             children: [
                               TextSpan(
-                                text: totalPrice.toStringAsFixed(0),
+                                text: '0',
                                 style: const TextStyle(
                                     color: Colors.green,fontSize: 18, fontWeight: FontWeight.w600),
                               ),
@@ -130,14 +110,6 @@ class _AppBarCartWidgetState extends State<AppBarCartWidget> {
         ],
       ),
     );
-  }
-  bool areAllItemsSelected() {
-    for (var selected in widget.itemSelections) {
-      if (!selected) {
-        return false;
-      }
-    }
-    return true;
   }
 }
 

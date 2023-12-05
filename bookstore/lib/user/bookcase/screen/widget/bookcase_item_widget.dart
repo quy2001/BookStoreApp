@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common/values/colors.dart';
-class SearchGridWidget extends StatefulWidget {
-  SearchGridWidget({super.key, required this.sObj, required this.index});
+class BookCaseItemWidget extends StatefulWidget {
+  BookCaseItemWidget({super.key, required this.sObj, required this.index});
   final Map sObj;
   final int index;
   @override
-  State<SearchGridWidget> createState() => _SearchGridWidgetState();
+  State<BookCaseItemWidget> createState() => _BookCaseItemWidgetState();
 }
 
-class _SearchGridWidgetState extends State<SearchGridWidget> {
+class _BookCaseItemWidgetState extends State<BookCaseItemWidget> {
 
   @override
   Widget build(BuildContext context) {

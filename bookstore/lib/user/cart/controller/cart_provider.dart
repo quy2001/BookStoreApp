@@ -2,7 +2,6 @@ import 'package:bookstore/base/controller/base_provider.dart';
 import 'package:bookstore/user/cart/model/cart_response.dart';
 import 'package:bookstore/user/cart/service/cart_service.dart';
 import 'package:flutter/material.dart';
-
 import '../../../base/widgets/dialog_widget.dart';
 import '../../../common/values/assets.dart';
 import '../../login_user/service/secure_storage.dart';
@@ -34,6 +33,7 @@ class CartProvider extends BaseProvider<CartServices> {
       );
     }on DioException catch (e) {
       messagesError = e.message ?? 'Co loi he thong';
+
       receivedError();
       showDialog(context: context, builder: (context){
         return DialogWidget(

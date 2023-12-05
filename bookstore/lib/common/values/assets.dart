@@ -9,6 +9,8 @@ class AppAssets{
   static const String imgOn1 = '${imagePath}linh_1.png';
   static const String imgOn2 = '${imagePath}linh_2.png';
   static const String imgOn3 = '${imagePath}linh_3.png';
+  static const String avatar = '${imagePath}avatar.jpg';
   static const String imgLoginBg = '${imagePath}background_login.png';
+
 
 }

@@ -1,6 +1,6 @@
 import 'package:bookstore/user/book_details/controller/book_provider.dart';
+import 'package:bookstore/user/read_book/screen/read_book_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../base/controller/consumer_base.dart';
 import '../../../../common/values/colors.dart';
 import '../../../../common/values/styles.dart';
@@ -10,8 +10,9 @@ import '../../model/book_response.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 class BodyBookDetailWidget extends StatefulWidget {
-  BodyBookDetailWidget({super.key, required this.id});
+  BodyBookDetailWidget({super.key, required this.id, required this.statusBook});
   final int id;
+  final bool statusBook;
   @override
   State<BodyBookDetailWidget> createState() => _BodyBookDetailWidgetState();
 }
@@ -36,7 +37,6 @@ class _BodyBookDetailWidgetState extends State<BodyBookDetailWidget> {
         child: ConsumerBase<BookProvider>(
             contextData: context,
             onRepository: (rep) {
-              print('================-----');
               BookProvider pro = rep;
               if (pro.isLoading) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -69,29 +69,6 @@ class _BodyBookDetailWidgetState extends State<BodyBookDetailWidget> {
               }
               return buildData(pro.book);
             }),
-        // child: Selector<BookProvider, Status>(
-        //     builder: (context, value, child) {
-        //       if (value == Status.loading) {
-        //         WidgetsBinding.instance.addPostFrameCallback((_) {
-        //           ProgressHUD.of(context)?.show();
-        //         });
-        //       } else if (value == Status.loaded) {
-        //         WidgetsBinding.instance.addPostFrameCallback((_) {
-        //           ProgressHUD.of(context)?.dismiss();
-        //         });
-        //       } else if (value == Status.error) {
-        //         WidgetsBinding.instance.addPostFrameCallback((_) {
-        //           ProgressHUD.of(context)?.dismiss();
-        //         });
-        //       } else if (value == Status.noData) {
-        //         WidgetsBinding.instance.addPostFrameCallback((_) {
-        //           ProgressHUD.of(context)?.dismiss();
-        //         });
-        //       }
-        //       return buildData(bookProvider);
-        //     }, selector: (context, pro) {
-        //   return pro.statusBookDetail;
-        // }),
       ),
     );
   }
@@ -109,7 +86,6 @@ class _BodyBookDetailWidgetState extends State<BodyBookDetailWidget> {
               child: Image.network(
                 book.cover,
                 width: size.width * 0.35,
-                // height: size.width * 0.,
                 fit: BoxFit.cover,
               ),
             ),
@@ -178,30 +154,78 @@ class _BodyBookDetailWidgetState extends State<BodyBookDetailWidget> {
                   const SizedBox(
                     height: 25,
                   ),
-                  Container(
-                    height: 30.0,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: AppColors.button),
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: AppColors.primaryColor,
-                            blurRadius: 2,
-                            offset: Offset(0, 2),
-                          )
-                        ]),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          shadowColor: Colors.transparent),
-                      child: const Text(
-                        'Thêm vào giỏ hàng',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ),
+                  widget.statusBook == true
+                      ? Row(
+                          children: [
+                            Expanded(
+                              flex: 7,
+                              child: Container(
+                                height: 35.0,
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        colors: AppColors.button),
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: AppColors.primaryColor,
+                                        blurRadius: 2,
+                                        offset: Offset(0, 2),
+                                      )
+                                    ]),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (c) => ReadBookScreen(
+                                                linkBook: book.file.toString(),
+                                                titleBook: book.name)));
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent),
+                                  child: Text(
+                                    'Đọc sách',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                                flex: 3,
+                                child: Icon(
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                  size: 35,
+                                )),
+                          ],
+                        )
+                      : Container(
+                          height: 35.0,
+                          decoration: BoxDecoration(
+                              gradient:
+                                  LinearGradient(colors: AppColors.button),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: AppColors.primaryColor,
+                                  blurRadius: 2,
+                                  offset: Offset(0, 2),
+                                )
+                              ]),
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent),
+                            child: Text(
+                              'Thêm vào giỏ hàng',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                        ),
                 ],
               ),
             )
@@ -266,9 +290,6 @@ class _BodyBookDetailWidgetState extends State<BodyBookDetailWidget> {
           height: 1,
           thickness: 1,
         ),
-        SizedBox(
-          height: size.width,
-        )
       ],
     );
   }

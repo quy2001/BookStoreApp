@@ -39,6 +39,7 @@ class SearchBook {
   int price;
   String cname;
   String aname;
+  String status;
 
   SearchBook({
     required this.id,
@@ -51,6 +52,7 @@ class SearchBook {
     required this.price,
     required this.cname,
     required this.aname,
+    required this.status,
   });
 
   factory SearchBook.fromJson(Map<String, dynamic> json) => SearchBook(
@@ -64,6 +66,7 @@ class SearchBook {
     price: json["price"],
     cname: json["cname"],
     aname: json["aname"],
+    status: json["status"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -77,5 +80,6 @@ class SearchBook {
     "price": price,
     "cname": cname,
     "aname": aname,
+    "status": status,
   };
 }

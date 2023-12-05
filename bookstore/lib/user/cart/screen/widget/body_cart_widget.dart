@@ -29,22 +29,12 @@ class _BodyCartWidgetState extends State<BodyCartWidget> {
     });
   }
 
-
-  void updateSelectAll(bool value) {
-    setState(() {
-      _selectAll = value;
-      for (var i = 0; i < itemSelections.length; i++) {
-        itemSelections[i] = value;
-      }
-      AppBarCartWidget.of(context)?.updateTotal(
-        listCartProvider.listCart.where((cart) => itemSelections[listCartProvider.listCart.indexOf(cart)]).toList(),
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ConsumerBase<CartProvider>(
+    return Column(
+      children: [
+        AppBarCartWidget(),
+        ConsumerBase<CartProvider>(
         contextData: context,
         onRepository: (req) {
           CartProvider provider = req;
@@ -58,9 +48,9 @@ class _BodyCartWidgetState extends State<BodyCartWidget> {
         onRepositoryError: (req) {
           return Center(
               child: Text(
-            req.messagesError ?? '',
-            style: const TextStyle(fontSize: 14, color: Colors.black),
-          ));
+                req.messagesError ?? '',
+                style: const TextStyle(fontSize: 14, color: Colors.black),
+              ));
         },
         onRepositoryNoData: (req) {
           return const Center(
@@ -77,45 +67,31 @@ class _BodyCartWidgetState extends State<BodyCartWidget> {
               ProgressHUD.of(context)?.dismiss();
             });
           }
-            itemSelections = List.generate(provider.listCart.length, (index) => false);
-          return Column(
-            children: [
-              AppBarCartWidget(
-                listCart: provider.listCart,
-                itemSelections: itemSelections,
-                updateTotal: (selectedItems) {
-                  setState(() {
-                    itemSelections = List.generate(provider.listCart.length, (index) {
-                      return selectedItems.contains(provider.listCart[index]);
+          itemSelections = List.generate(provider.listCart.length, (index) => false);
+          return Expanded(
+            child: ListView.builder(
+              padding:
+              EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 30),
+              itemCount: provider.listCart.length,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                return CartItemWidget(
+                  id: provider.listCart[index].id,
+                  listCart: provider.listCart[index],
+                  isSelected: itemSelections[index],
+                  onSelectionChanged: (bool isSelected) {
+                    setState(() {
+                      itemSelections[index] = isSelected;
+                      _selectAll = itemSelections.every((isSelected) => isSelected);
                     });
-                  });
-                },
-                onSelectAllChanged: updateSelectAll, // Thêm callback để cập nhật trạng thái "Tất cả"
-              ),
-              Expanded(
-                child: ListView.builder(
-                  padding:
-                      EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 30),
-                  itemCount: provider.listCart.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    return CartItemWidget(
-                      id: provider.listCart[index].id,
-                      listCart: provider.listCart[index],
-                      isSelected: itemSelections[index],
-                      onSelectionChanged: (bool isSelected) {
-                        setState(() {
-                          itemSelections[index] = isSelected;
-                          _selectAll = itemSelections.every((isSelected) => isSelected);
-                          updateSelectAll(_selectAll);
-                        });
-                      },
-                    );
                   },
-                ),
-              ),
-            ],
+                );
+              },
+            ),
           );
-        });
+        }),
+      ],
+    );
+
   }
 }

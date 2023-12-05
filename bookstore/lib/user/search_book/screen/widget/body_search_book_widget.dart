@@ -1,3 +1,4 @@
+import 'package:bookstore/base/controller/consumer_base.dart';
 import 'package:bookstore/user/search_book/controller/search_book_provider.dart';
 import 'package:bookstore/user/search_book/screen/widget/search_history_widget.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,9 @@ import '../../../../common/values/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:refresh_loadmore/refresh_loadmore.dart';
 
-import '../../controller/author_provider.dart';
-import '../../controller/category_provider.dart';
+import '../../../authors/controller/author_provider.dart';
+import '../../../bookcase/controller/bookcase_provider.dart';
+import '../../../categories/controller/category_provider.dart';
 
 class BodySearchBookWidget extends StatefulWidget {
   const BodySearchBookWidget({super.key});
@@ -25,6 +27,7 @@ class _BodySearchBookWidgetState extends State<BodySearchBookWidget> {
   late AuthorProvider authorProvider;
   late CategoryProvider categoryProvider;
 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -34,6 +37,7 @@ class _BodySearchBookWidgetState extends State<BodySearchBookWidget> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       searchBookProvider.resetPage();
       searchBookProvider.getListBook();
+
     });
     authorProvider = Provider.of<AuthorProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -44,7 +48,6 @@ class _BodySearchBookWidgetState extends State<BodySearchBookWidget> {
       categoryProvider.getCategory(context);
     });
   }
-
   Future<void> _scrollListener() async {
     searchBookProvider.loadMore();
   }
@@ -151,6 +154,7 @@ class _BodySearchBookWidgetState extends State<BodySearchBookWidget> {
             ],
           ),
         ),
+        //lấy danh sách các sách
         Selector<SearchBookProvider, Status>(builder: (context, value, child) {
           if (value == Status.loading) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -178,7 +182,7 @@ class _BodySearchBookWidgetState extends State<BodySearchBookWidget> {
       ],
     );
   }
-
+  //build danh sách tác giả.
   Widget buildDataAuthor( AuthorProvider provider) {
     return Center(
       child: DropdownButton(
@@ -201,7 +205,7 @@ class _BodySearchBookWidgetState extends State<BodySearchBookWidget> {
       ),
     );
   }
-
+  //build danh sách thể loại
   Widget buildDataCategory(CategoryProvider provider) {
     return Center(
       child: DropdownButton(
@@ -226,6 +230,7 @@ class _BodySearchBookWidgetState extends State<BodySearchBookWidget> {
     );
   }
 
+  //build dữ liệu sách
   Widget buildData(SearchBookProvider provider) {
     return Expanded(
       child: RefreshLoadmore(

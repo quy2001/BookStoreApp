@@ -1,5 +1,5 @@
-import 'package:bookstore/base/service/dio_option.dart';
 import 'package:bookstore/common/values/colors.dart';
+import 'package:bookstore/user/read_book/screen/read_book_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../../base/widgets/dialog_widget.dart';
 import '../../../../common/values/assets.dart';
@@ -28,6 +28,7 @@ class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return Container(
       padding:const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       margin:const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
@@ -139,7 +140,7 @@ class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
                     ] ),
                     child: ElevatedButton(
                       onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (c)=> BookDetailScreen(id: widget.listBook.id, titleBook:widget.listBook.name,)));
+                            Navigator.push(context, MaterialPageRoute(builder: (c)=> BookDetailScreen(id: widget.listBook.id, titleBook:widget.listBook.name, statusBook: bool.parse(widget.listBook.status.toString()),)));
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
@@ -154,24 +155,38 @@ class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
                       height: 35.0,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
-                              colors:  AppColors.button),
+                              colors: bool.parse(widget.listBook.status.toString()) == true ? AppColors.buttonDelete : AppColors.button),
                           borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
+                          boxShadow: [
                             BoxShadow(
-                              color: AppColors.primaryColor,
+                              color: bool.parse(widget.listBook.status.toString()) == true ? Colors.black87 : AppColors.primaryColor,
                               blurRadius: 2,
                               offset: Offset(0, 2),
                             )
                           ]),
                       child: ElevatedButton(
                         onPressed: () {
-                          addCart();
+                          bool.parse(widget.listBook.status.toString()) == true ? showDialog(context: context, builder: (context){
+                            return DialogWidget(
+                              title: 'Thông báo',
+                              icon: AppAssets.icoDialogNotice,
+                              cancelButton: true,
+                              content: 'Sách đã được mua',
+                              titleButton: 'Đọc sách',
+                              function: (){
+                                //hàm xử lý đọc sách
+                                Navigator.pop(context);
+                                Navigator.push(context, MaterialPageRoute(builder: (c)=>ReadBookScreen(linkBook: widget.listBook.file, titleBook: widget.listBook.name)));
+                              },
+                            );
+                          }
+                          ) : addCart();
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
                             shadowColor: Colors.transparent),
-                        child: const Text(
-                          'Thêm vào giỏ hàng',
+                        child: Text(
+                          bool.parse(widget.listBook.status.toString()) == true ? 'Đã mua' : 'Thêm vào giỏ hàng',
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 12),
                         ),

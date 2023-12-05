@@ -1,5 +1,5 @@
-import 'package:bookstore/user/bookcase/screen/widget/search_grid_widget.dart';
-import 'package:bookstore/user/bookcase/screen/widget/search_widget.dart';
+import 'package:bookstore/user/bookcase/screen/widget/bookcase_item_widget.dart';
+import 'package:bookstore/user/bookcase/screen/widget/search_bookcase_widget.dart';
 import 'package:flutter/material.dart';
 class BodyBookcaseWidget extends StatefulWidget {
   const BodyBookcaseWidget({super.key});
@@ -30,6 +30,14 @@ class _BodyBookcaseWidgetState extends State<BodyBookcaseWidget> {
       "name": "Business",
       "img": "assets/img/2.jpg",
     },
+    {
+      "name": "Tôi là bê tô",
+      "img": "assets/img/toi_la_be_to.jpg",
+    },
+    {
+      "name": "Business",
+      "img": "assets/img/2.jpg",
+    },
   ];
   @override
   Widget build(BuildContext context) {
@@ -39,6 +47,7 @@ class _BodyBookcaseWidgetState extends State<BodyBookcaseWidget> {
         children: [
           SearchBookcaseWidget(),
           SizedBox(height: 20,),
+
           Expanded(
             child: GridView.builder(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -51,7 +60,7 @@ class _BodyBookcaseWidgetState extends State<BodyBookcaseWidget> {
                 itemCount: searchArr.length,
                 itemBuilder: (context, index) {
                   var sObj = searchArr[index] as Map? ?? {};
-                  return SearchGridWidget(
+                  return BookCaseItemWidget(
                     sObj: sObj,
                     index: index,
                   );

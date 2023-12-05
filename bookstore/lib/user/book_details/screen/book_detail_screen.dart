@@ -7,9 +7,10 @@ import 'package:provider/provider.dart';
 import '../../../base/service/dio_option.dart';
 
 class BookDetailScreen extends StatefulWidget {
-  const BookDetailScreen({super.key, required this.id, required this.titleBook});
+  const BookDetailScreen({super.key, required this.id, required this.titleBook, required this.statusBook});
  final int id;
  final String titleBook;
+ final bool statusBook;
   @override
   State<BookDetailScreen> createState() => _BookDetailScreenState();
 }
@@ -22,14 +23,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         ChangeNotifierProvider(create: (context)=> BookProvider(BookService(DioOption().createDio())))
       ],
       child: AppBarWidget(
-        haveBottomButton: true,
-        tittleButton: 'Thêm giỏ hàng',
-        functionBottomButton: (){
-          Navigator.pop(context);
-        },
+        haveBottomButton:widget.statusBook == true ? true : false,
+        tittleButton: 'Sách nói' ,
+        functionBottomButton: (){},
         tittle: Text(widget.titleBook),
           haveBackButton: true,
-          child: BodyBookDetailWidget(id: widget.id,)
+          child: BodyBookDetailWidget(id: widget.id, statusBook: widget.statusBook,)
       ),
     );
   }

@@ -15,6 +15,7 @@ class _BookcaseScreenState extends State<BookcaseScreen> {
   Widget build(BuildContext context) {
     return AppBarWidget(
       tittle: Text('Tủ sách của tôi'),
+      haveMenuButton: true,
       child: BodyBookcaseWidget(),
     );
   }

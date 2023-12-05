@@ -2,6 +2,7 @@ import 'package:bookstore/common/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
+import '../../user/main_tab/main_tab_screen.dart';
 import 'button_widget.dart';
 
 class AppBarWidget extends StatelessWidget {
@@ -9,12 +10,17 @@ class AppBarWidget extends StatelessWidget {
       {super.key,
       required this.child,
       this.tittle,
-      this.haveBackButton, this.haveBottomButton, this.functionBottomButton, this.tittleButton});
+      this.haveBackButton,
+      this.haveBottomButton,
+      this.functionBottomButton,
+      this.tittleButton,
+      this.haveMenuButton});
 
   final Widget child;
   final Widget? tittle;
   final String? tittleButton;
   final bool? haveBackButton;
+  final bool? haveMenuButton;
   final bool? haveBottomButton;
   final Function()? functionBottomButton;
 
@@ -27,6 +33,16 @@ class AppBarWidget extends StatelessWidget {
         centerTitle: true,
         backgroundColor: AppColors.primaryColor,
         shadowColor: AppColors.primaryColor,
+        // leadingWidth: 2,
+        actions: [
+          haveMenuButton == true
+              ? IconButton(
+                  onPressed: () {
+                    sideMenuScaffoldKey.currentState?.openEndDrawer();
+                  },
+                  icon: Icon(Icons.menu))
+              : const SizedBox(),
+        ],
         leading: haveBackButton == true
             ? BackButton(
                 onPressed: () {
@@ -45,23 +61,24 @@ class AppBarWidget extends StatelessWidget {
                 return child;
               },
             ),
-          )
-      ),
-      bottomNavigationBar: haveBottomButton == true ? BottomAppBar(
-        child: Container(
-          padding: const EdgeInsets.all(15),
-          decoration: const BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 3,
-              offset: Offset(0, -3),
-            ),
-          ]),
-          child: ButtonWidget(
-              title: tittleButton!,
-              ontap: functionBottomButton!),
-        ),
-      ) : const SizedBox(),
+          )),
+      bottomNavigationBar: haveBottomButton == true
+          ? BottomAppBar(
+              child: Container(
+                padding: const EdgeInsets.all(15),
+                decoration:
+                    const BoxDecoration(color: Colors.white, boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 3,
+                    offset: Offset(0, -3),
+                  ),
+                ]),
+                child: ButtonWidget(
+                    title: tittleButton!, ontap: functionBottomButton!),
+              ),
+            )
+          : const SizedBox(),
     );
   }
 }

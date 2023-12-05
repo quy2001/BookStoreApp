@@ -13,12 +13,14 @@ class SearchBookRequest {
   int idCategory;
   int page;
   String name;
+  int userid;
 
   SearchBookRequest({
     required this.idAuthor,
     required this.idCategory,
     required this.page,
     required this.name,
+    required this.userid,
   });
 
   factory SearchBookRequest.fromJson(Map<String, dynamic> json) => SearchBookRequest(
@@ -26,6 +28,7 @@ class SearchBookRequest {
     idCategory: json["idCategory"],
     page: json["page"],
     name: json["name"],
+    userid: json["userid"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -33,5 +36,6 @@ class SearchBookRequest {
     "idCategory": idCategory,
     "page": page,
     "name": name,
+    "userid": userid,
   };
 }

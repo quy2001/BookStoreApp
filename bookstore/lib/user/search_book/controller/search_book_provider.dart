@@ -2,6 +2,7 @@ import 'package:bookstore/base/controller/base_provider.dart';
 import 'package:bookstore/user/search_book/model/search_book_request.dart';
 import 'package:bookstore/user/search_book/service/book_service.dart';
 import 'package:dio/dio.dart';
+import '../../login_user/service/secure_storage.dart';
 import '../model/search_books_response.dart';
 class SearchBookProvider extends BaseProvider<SearchBookServices>{
   SearchBookProvider(SearchBookServices service) : super(service);
@@ -62,11 +63,13 @@ class SearchBookProvider extends BaseProvider<SearchBookServices>{
       startLoading(() {
         statusBook = Status.loading;
       });
+      var keyidUser = await SecureStorage().read('idUser');
       listBook = await service.postSearchBook(request: SearchBookRequest(
           idAuthor: idAuthor,
           idCategory: idCategory,
           page: page,
-          name: name)
+          name: name,
+          userid: int.parse(keyidUser))
       );
       if(refresh == true){
         listBookDisplay = listBook;

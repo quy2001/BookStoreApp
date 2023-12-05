@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DialogWidget extends StatelessWidget {
-   DialogWidget({this.title, this.icon, this.cancelButton, this.content,this.function,super.key});
+   DialogWidget({this.titleButton,this.title, this.icon, this.cancelButton, this.content,this.function,super.key});
 
   String? title;
   String? content;
+  String? titleButton;
   String? icon;
   bool? cancelButton;
   Function()? function;
@@ -55,9 +56,9 @@ class DialogWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8), // bo góc của button
                 ),
               ),
-              child: const Text(
-                "Xác nhận",
-                style: TextStyle(
+              child: Text(
+               titleButton ?? "Xác nhận",
+                style: const TextStyle(
                     fontSize: 14,
                     fontFamily: 'Open Sans',
                     fontWeight: FontWeight.w700),

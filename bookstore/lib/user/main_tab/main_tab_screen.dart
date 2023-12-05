@@ -3,8 +3,11 @@ import 'package:bookstore/user/home/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../account/screen/account_screen.dart';
+import '../authors/screen/author_screen.dart';
 import '../bookcase/screen/bookcase_screen.dart';
 import '../cart/screen/cart_screen.dart';
+import '../categories/screen/category_screen.dart';
+import '../favourite/screen/favourite_screen.dart';
 import '../search_book/screen/search_book_screen.dart';
 
 class MainTabScreen extends StatefulWidget {
@@ -74,6 +77,45 @@ class _MainTabScreenState extends State<MainTabScreen> {
                           : null,
                       child: GestureDetector(
                         onTap: () {
+                          if(index==1){
+                            Navigator.push(context, MaterialPageRoute(builder: (_)=>FavouriteScreen()));
+                            sideMenuScaffoldKey.currentState?.closeEndDrawer();
+                          }else if(index == 0){
+                            setState(() {
+                              currentScreen = HomeScreen();
+                              currentTab = 0;
+                            });
+                            sideMenuScaffoldKey.currentState?.closeEndDrawer();
+                          }else if(index == 2)
+                            {
+                              setState(() {
+                                currentScreen = BookcaseScreen();
+                                currentTab = 1;
+                              });
+                              sideMenuScaffoldKey.currentState?.closeEndDrawer();
+                            }
+                          else if(index == 3)
+                          {
+                            Navigator.push(context, MaterialPageRoute(builder: (_)=>AuthorScreen()));
+                            sideMenuScaffoldKey.currentState?.closeEndDrawer();
+                          }
+                          else if(index == 4)
+                          {
+                            Navigator.push(context, MaterialPageRoute(builder: (_)=>CategoryScreen()));
+                            sideMenuScaffoldKey.currentState?.closeEndDrawer();
+                          }
+                          else if(index == 5)
+                          {
+                            setState(() {
+                              currentScreen = AccountScreen();
+                              currentTab = 3;
+                            });
+                            sideMenuScaffoldKey.currentState?.closeEndDrawer();
+                          }
+                          else if(index == 6)
+                          {
+
+                          }
                           setState(() {
                             selectMenu = index;
                           });

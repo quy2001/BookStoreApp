@@ -20,15 +20,3 @@ class SearchBookServices extends BaseService {
     //return ListDocumentResponse.fromJson(result.data!).data;
   }
 }
-
-
-// class BookServices extends BaseService {
-//   BookServices(Dio client) : super(client);
-//   Future<List<Book>> getBook(int i, String name) async {
-//     final result = await client
-//         .fetch<Map<String, dynamic>>(setStreamType<BookResponse>(Options(
-//       method: 'GET',
-//     ).compose(client.options, '${ServicesUrl.getBookPage}?page=$i&name=$name')));
-//     return BookResponse.fromJson(result.data!).data ?? [];
-//   }
-// }

@@ -12,5 +12,11 @@ class ServicesUrl{
   static const String postAddCart = "$baseUrl/api/cart/add";
   static const String getListCart = "$baseUrl/api/cart/getList";
   static const String deleteCart = "$baseUrl/api/cart/delete";
+  static const String getAccount = "$baseUrl/user/userDetail";
+
+  static const String getBookByIdCategory = "$baseUrl/api/booksCategory";
+  static const String getBookByIdAuthor = "$baseUrl/api/bookAuthor";
+
+  static const String getListMyBook = "$baseUrl/api/cart/getList/myBook";
 
 }

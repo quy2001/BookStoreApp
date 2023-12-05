@@ -1,7 +1,11 @@
+import 'package:bookstore/user/account/controller/account_provider.dart';
+import 'package:bookstore/user/account/screen/widget/body_account_widget.dart';
+import 'package:bookstore/user/account/service/account_service.dart';
 import 'package:flutter/material.dart';
 
+import '../../../base/service/dio_option.dart';
 import '../../../base/widgets/app_bar_widget.dart';
-
+import 'package:provider/provider.dart';
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
 
@@ -12,9 +16,15 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
-    return AppBarWidget(
-      tittle: Text('Tài khoản'),
-      child: Container(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context)=> AccountProvider(AccountService(DioOption().createDio())))
+      ],
+      child: AppBarWidget(
+        haveMenuButton: true,
+        tittle: Text('Tài khoản'),
+        child: BodyAccountWidget(),
+      ),
     );
   }
 }
