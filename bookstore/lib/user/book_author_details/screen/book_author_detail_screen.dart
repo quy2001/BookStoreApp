@@ -9,6 +9,8 @@ import '../../bookcase/controller/bookcase_provider.dart';
 import '../../bookcase/service/bookcase_service.dart';
 import '../../cart/controller/cart_provider.dart';
 import '../../cart/service/cart_service.dart';
+import '../../search_book/controller/search_book_provider.dart';
+import '../../search_book/service/book_service.dart';
 import '../controller/book_author_provider.dart';
 import '../service/book_author_service.dart';
 
@@ -31,7 +33,8 @@ class _BookAuthorDetailScreenState extends State<BookAuthorDetailScreen> {
         ChangeNotifierProvider(
             create: (context)=>CartProvider(CartServices(DioOption().createDio()))),
         ChangeNotifierProvider(
-            create: (context)=>BookcaseProvider(BookcaseServices(DioOption().createDio()))),
+            create: (context) =>
+                SearchBookProvider(SearchBookServices(DioOption().createDio()))),
       ],
       child: AppBarWidget(
           tittle: Text(widget.titleAuthor),

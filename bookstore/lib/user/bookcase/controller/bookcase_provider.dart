@@ -1,14 +1,15 @@
+import 'package:bookstore/user/bookcase/model/bookcaseRequest.dart';
+import 'package:bookstore/user/bookcase/model/bookcaseResponse.dart';
 import 'package:bookstore/user/bookcase/service/bookcase_service.dart';
 import '../../../base/controller/base_provider.dart';
-import '../../cart/model/cart_response.dart';
 import '../../login_user/service/secure_storage.dart';
 import 'package:dio/dio.dart';
 class BookcaseProvider extends BaseProvider<BookcaseServices> {
   BookcaseProvider(BookcaseServices service) : super(service);
 
-  late List<Cart> listBookcase = [];
+  late List<Bookcase> listBookcase = [];
+  String name ='';
   Status statusBookCase = Status.none;
-  //lay danh sach gio hang
   Future<void> getListBookcase() async{
     resetStatus();
     try{
@@ -16,7 +17,10 @@ class BookcaseProvider extends BaseProvider<BookcaseServices> {
         statusBookCase = Status.loading;
       });
       var keyidUser = await SecureStorage().read('idUser');
-      listBookcase = await service.getBookcase(keyidUser);
+      listBookcase = await service.postBookcase(
+          request: BookcaseRequest(
+              idUser: int.parse(keyidUser),
+              bname: name));
       if(listBookcase.isEmpty){
         receivedNoData((){
           statusBookCase = Status.noData;

@@ -1,9 +1,10 @@
+import 'package:bookstore/user/bookcase/model/bookcaseResponse.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/values/colors.dart';
 class BookCaseItemWidget extends StatefulWidget {
-  BookCaseItemWidget({super.key, required this.sObj, required this.index});
-  final Map sObj;
+  BookCaseItemWidget({super.key, required this.index, required this.bookcase});
+  final Bookcase bookcase;
   final int index;
   @override
   State<BookCaseItemWidget> createState() => _BookCaseItemWidgetState();
@@ -22,7 +23,7 @@ class _BookCaseItemWidgetState extends State<BookCaseItemWidget> {
       padding: EdgeInsets.symmetric(horizontal: 4,vertical: 10),
       child: Column(
         children: [
-          Text(widget.sObj["name"].toString(),
+          Text(widget.bookcase.bname,
             maxLines: 2,
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -34,7 +35,7 @@ class _BookCaseItemWidgetState extends State<BookCaseItemWidget> {
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.asset(widget.sObj["img"].toString(),
+            child: Image.network(widget.bookcase.bimage,
               width: size.width*0.23,
               height: size.width*0.25*1.45,
               fit: BoxFit.cover,

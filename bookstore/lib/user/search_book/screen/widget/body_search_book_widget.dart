@@ -1,4 +1,3 @@
-import 'package:bookstore/base/controller/consumer_base.dart';
 import 'package:bookstore/user/search_book/controller/search_book_provider.dart';
 import 'package:bookstore/user/search_book/screen/widget/search_history_widget.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:refresh_loadmore/refresh_loadmore.dart';
 
 import '../../../authors/controller/author_provider.dart';
-import '../../../bookcase/controller/bookcase_provider.dart';
 import '../../../categories/controller/category_provider.dart';
 
 class BodySearchBookWidget extends StatefulWidget {

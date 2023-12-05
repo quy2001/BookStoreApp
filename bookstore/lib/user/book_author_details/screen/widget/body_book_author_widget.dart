@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../base/controller/base_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
-
-import '../../../bookcase/controller/bookcase_provider.dart';
+import '../../../search_book/controller/search_book_provider.dart';
 import '../../../search_book/screen/widget/search_history_widget.dart';
-import '../../controller/book_author_provider.dart';
 
 
 class BodyBookAuthorWidget extends StatefulWidget {
@@ -18,20 +16,22 @@ class BodyBookAuthorWidget extends StatefulWidget {
 
 class _BodyBookAuthorWidgetState extends State<BodyBookAuthorWidget> {
 
-  late BookAuthorProvider bookAuthorProvider;
+  late SearchBookProvider searchBookProvider;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    bookAuthorProvider = Provider.of<BookAuthorProvider>(context, listen: false);
+    searchBookProvider = Provider.of<SearchBookProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      bookAuthorProvider.getBookAuthor(widget.id);
+      searchBookProvider.resetPage();
+      searchBookProvider.getListBook();
+      searchBookProvider.searchAuthCate(widget.id, 0);
     });
   }
   
   @override
   Widget build(BuildContext context) {
-    return Selector<BookAuthorProvider, Status>(builder: (context, value, child) {
+    return Selector<SearchBookProvider, Status>(builder: (context, value, child) {
       if (value == Status.loading) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           ProgressHUD.of(context)?.show();
@@ -51,12 +51,12 @@ class _BodyBookAuthorWidgetState extends State<BodyBookAuthorWidget> {
         //nếu k có sách thì hiển thị hàm hình k có dữ liệu
         return Center(child: Text('Không có dữ liệu'));
       }
-      return buildData(bookAuthorProvider);
+      return buildData(searchBookProvider);
     }, selector: (context, pro) {
-      return pro.statusBookAuthor;
+      return pro.statusBook;
     });
   }
-  Widget buildData(BookAuthorProvider provider) {
+  Widget buildData(SearchBookProvider provider) {
     return ListView.builder(
           shrinkWrap: true,
           padding: EdgeInsets.only(top: 5, left: 10, right: 10, bottom: 25),

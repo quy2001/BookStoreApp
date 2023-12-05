@@ -18,10 +18,11 @@ class SearchBookProvider extends BaseProvider<SearchBookServices>{
   late bool canLoadMore;
   bool refresh = false;
 
-  void resetPage() {
+  //truyền vào các id để reset khi vào sách của tác giả, sách của thể loại.
+  void resetPage({int? idAu, int? idCa}) {
     page = 1;
-    idAuthor = 0;
-    idCategory =0;
+    idAuthor = idAu ?? 0;
+    idCategory =idCa ?? 0;
     name='';
     canLoadMore = true;
   }
@@ -54,8 +55,6 @@ class SearchBookProvider extends BaseProvider<SearchBookServices>{
     listBookDisplay=[];
     getListBook();
   }
-
-
 
   Future<void> getListBook() async{
     resetStatus();
