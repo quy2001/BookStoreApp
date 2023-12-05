@@ -1,6 +1,4 @@
 import 'package:dio/dio.dart';
-
-
 import '../../../base/service/base_service.dart';
 import '../../../base/service/services_url.dart';
 import '../model/category_response.dart';
@@ -12,6 +10,6 @@ class CategoryServices extends BaseService {
         .fetch<Map<String, dynamic>>(setStreamType<CategoryResponse>(Options(
       method: 'GET',
     ).compose(client.options, ServicesUrl.getCategories)));
-    return CategoryResponse.fromJson(result.data!).data;
+    return CategoryResponse.fromJson(result.data!).data ?? [];
   }
 }

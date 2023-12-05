@@ -10,6 +10,6 @@ class AuthorService extends BaseService{
         .fetch<Map<String,dynamic>>(setStreamType<AuthorResponse>(Options(
       method: 'GET',
     ).compose(client.options, ServicesUrl.getAuthors)));
-    return AuthorResponse.fromJson(result.data!).data;
+    return AuthorResponse.fromJson(result.data!).data ?? [];
   }
 }

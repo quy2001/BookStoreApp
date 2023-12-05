@@ -1,21 +1,18 @@
 import 'package:bookstore/common/values/colors.dart';
+import 'package:bookstore/user/cart/controller/cart_provider.dart';
+import 'package:bookstore/user/cart/service/cart_service.dart';
 import 'package:bookstore/user/search_book/controller/search_book_provider.dart';
 import 'package:bookstore/user/search_book/screen/widget/body_search_book_widget.dart';
-import 'package:bookstore/user/search_book/screen/widget/search_filter_widget.dart';
-import 'package:bookstore/user/search_book/screen/widget/search_force_widget.dart';
 import 'package:bookstore/user/search_book/screen/widget/search_name_book_widget.dart';
 import 'package:bookstore/user/search_book/service/book_service.dart';
 import 'package:flutter/material.dart';
-import 'package:bookstore/common/extenstion.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import '../../../base/service/dio_option.dart';
-import 'package:provider/provider.dart';
-
-import '../controller/author_provider.dart';
-import '../controller/category_provider.dart';
-import '../service/author_service.dart';
-import '../service/category_service.dart';
+import '../../authors/controller/author_provider.dart';
+import '../../categories/controller/category_provider.dart';
+import '../../authors/services/author_service.dart';
+import '../../categories/service/category_service.dart';
 
 class SearchBookScreen extends StatefulWidget {
   const SearchBookScreen({super.key});
@@ -37,6 +34,8 @@ class _SearchBookScreenState extends State<SearchBookScreen> {
             create: (context)=>CategoryProvider(CategoryServices(DioOption().createDio()))),
         ChangeNotifierProvider(
             create: (context)=>AuthorProvider(AuthorService(DioOption().createDio()))),
+        ChangeNotifierProvider(
+            create: (context)=>CartProvider(CartServices(DioOption().createDio()))),
       ],
       child: Scaffold(
         backgroundColor: AppColors.bgColor,

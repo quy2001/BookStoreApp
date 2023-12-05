@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../base/controller/base_provider.dart';
-import '../../../../base/widgets/appbar_login_widget.dart';
 import '../../../../base/widgets/button_widget.dart';
 import '../../../../base/widgets/dialog_widget.dart';
 import '../../../../common/values/assets.dart';
@@ -50,20 +49,6 @@ class _BodyRegisterWidgetState extends State<BodyRegisterWidget> {
         WidgetsBinding.instance.addPostFrameCallback(
           (_) async {
             ProgressHUD.of(context)?.dismiss();
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return DialogWidget(
-                    title: 'Thành công',
-                    icon: AppAssets.icoDialogSuccess,
-                    cancelButton: false,
-                    content: 'Bạn đã đăng ký tài khoản thành công',
-                    function: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (_) => LoginUserScreen()));
-                    },
-                  );
-                });
             //show
           },
         );

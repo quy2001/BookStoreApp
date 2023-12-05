@@ -25,6 +25,7 @@ class _CarttScreenState extends State<CartScreen> {
       ],
       child: AppBarWidget(
         tittle: Text('Giỏ hàng'),
+        haveMenuButton: true,
         child: SizedBox(
           width: double.infinity,
           height: double.infinity,

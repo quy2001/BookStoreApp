@@ -1,20 +1,41 @@
+import 'package:bookstore/base/widgets/dialog_widget.dart';
+import 'package:bookstore/user/cart/controller/cart_provider.dart';
+import 'package:bookstore/user/cart/model/cart_response.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import '../../../../common/values/assets.dart';
 import '../../../../common/values/colors.dart';
 import '../../../../common/values/styles.dart';
 
+import '../../../book_details/screen/book_detail_screen.dart';
+
 class CartItemWidget extends StatefulWidget {
-  const CartItemWidget({super.key, required this.cObj});
-  final Map cObj;
+  const CartItemWidget({super.key, required this.listCart, required this.id, required this.isSelected, required this.onSelectionChanged});
 
-  // int id;
-
+  final Cart listCart;
+  final int id;
+  final bool isSelected;
+  final Function(bool) onSelectionChanged;
   @override
   State<CartItemWidget> createState() => _CartItemWidgetState();
 }
 
 class _CartItemWidgetState extends State<CartItemWidget> {
-  bool? _isChecked = false;
+  bool _isSelected = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _isSelected = widget.isSelected;
+  }
+
+  late CartProvider cartProvider;
+
+  void deletCart(){
+    cartProvider = Provider.of<CartProvider>(context, listen: false);
+      cartProvider.deleteCart(widget.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -36,8 +57,8 @@ class _CartItemWidgetState extends State<CartItemWidget> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              widget.cObj['img'],
+            child: Image.network(
+              widget.listCart.bimage,
               width: size.width * 0.2,
               height: size.width * 0.3,
               fit: BoxFit.cover,
@@ -48,96 +69,114 @@ class _CartItemWidgetState extends State<CartItemWidget> {
           ),
           Expanded(
               child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Expanded(
-                    child: Text(
-                      widget.cObj['name'],
-                      maxLines: 2,
-                      textAlign: TextAlign.left,
-                      style: AppStyles.titleBook,
-                    ),
-                  ),
-                  Checkbox(value: _isChecked,
-                      activeColor: AppColors.primaryColor,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _isChecked = value ?? false;
-                        });
-                      }),
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              RichText(
-                text: TextSpan(
-                    style: DefaultTextStyle.of(context).style,
+                  Row(
                     children: [
-                      TextSpan(
-                        text: widget.cObj['price'],
-                        style: const TextStyle(
-                            color: Colors.green, fontWeight: FontWeight.w600),
-                      ),
-                      const TextSpan(
-                        text: " VNĐ",
-                        style: TextStyle(
-                            color: Colors.red, fontWeight: FontWeight.w600),
-                      ),
-                    ]),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 35.0,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              colors:  AppColors.button),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: AppColors.primaryColor,
-                              blurRadius: 2,
-                              offset: Offset(0, 2),
-                            )
-                          ]),
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent),
-                        child: const Text(
-                          'Xem sách',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 16),
+                      Expanded(
+                        child: Text(
+                          widget.listCart.bname,
+                          maxLines: 2,
+                          textAlign: TextAlign.left,
+                          style: AppStyles.titleBook,
                         ),
                       ),
-                    ),
+                      Checkbox(
+                          value: _isSelected,
+                          activeColor: AppColors.primaryColor,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              _isSelected = value ?? false;
+                              widget.onSelectionChanged(_isSelected);
+                            });
+                          }),
+                    ],
                   ),
                   const SizedBox(
-                    width: 8,
+                    height: 8,
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    ),
+                  RichText(
+                    text: TextSpan(
+                        style: DefaultTextStyle.of(context).style,
+                        children: [
+                          TextSpan(
+                            text: widget.listCart.bprice.toString(),
+                            style: const TextStyle(
+                                color: Colors.green, fontWeight: FontWeight.w600),
+                          ),
+                          const TextSpan(
+                            text: " VNĐ",
+                            style: TextStyle(
+                                color: Colors.red, fontWeight: FontWeight.w600),
+                          ),
+                        ]),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 35.0,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors:  AppColors.button),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: AppColors.primaryColor,
+                                  blurRadius: 2,
+                                  offset: Offset(0, 2),
+                                )
+                              ]),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (c)=> BookDetailScreen(id: widget.listCart.idBook, titleBook:widget.listCart.bname, statusBook: false,)));
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shadowColor: Colors.transparent),
+                            child: const Text(
+                              'Xem sách',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          showDialog(context: context, builder: (context){
+                            return DialogWidget(
+                              title: 'Thông báo',
+                              icon: AppAssets.icoDialogNotice,
+                              cancelButton: true,
+                              content: 'Bạn muốn xóa sách khỏi giỏ hàng?',
+                              function: (){
+                                deletCart();
+                                Navigator.pop(context);
+                              },
+                            );
+                          }
+                          );
+                        },
+                        icon: Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
-              ),
-            ],
-          )
+              )
           ),
         ],
-      ),
+      )
     );
   }
 }

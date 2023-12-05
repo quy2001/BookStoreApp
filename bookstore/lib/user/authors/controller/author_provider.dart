@@ -1,9 +1,8 @@
 import 'package:bookstore/base/controller/base_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-
 import '../model/author_response.dart';
-import '../service/author_service.dart';
+import '../services/author_service.dart';
 final Dio dio = Dio();
 class AuthorProvider extends BaseProvider<AuthorService>{
   AuthorProvider (AuthorService service) : super (service);
@@ -27,5 +26,4 @@ class AuthorProvider extends BaseProvider<AuthorService>{
       });
     }
   }
-
 }

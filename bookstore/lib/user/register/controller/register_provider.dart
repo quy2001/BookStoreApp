@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import '../../../base/service/dio_option.dart';
 import 'package:dio/dio.dart';
 
+import '../../../base/widgets/dialog_widget.dart';
+import '../../../common/values/assets.dart';
+import '../../login_user/screen/login_user_screen.dart';
 import '../model/register_request.dart';
 import '../service/register_service.dart';
 
@@ -27,6 +30,20 @@ class RegisterProvider extends BaseProvider<RegisterServices>{
       finishLoading(() {
         statusRegister = Status.loaded;
       });
+      showDialog(
+          context: context,
+          builder: (context) {
+            return DialogWidget(
+              title: 'Thành công',
+              icon: AppAssets.icoDialogSuccess,
+              cancelButton: false,
+              content: 'Bạn đã đăng ký tài khoản thành công',
+              function: () {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (_) => LoginUserScreen()));
+              },
+            );
+          });
     } on DioException catch (e) {
       print(e.message);
       receivedError(() {

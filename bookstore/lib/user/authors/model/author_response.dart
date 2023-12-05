@@ -10,7 +10,7 @@ String authorResponseToJson(AuthorResponse data) => json.encode(data.toJson());
 
 class AuthorResponse {
   int success;
-  List<Author> data;
+  List<Author>? data;
 
   AuthorResponse({
     required this.success,
@@ -19,12 +19,12 @@ class AuthorResponse {
 
   factory AuthorResponse.fromJson(Map<String, dynamic> json) => AuthorResponse(
     success: json["success"],
-    data: List<Author>.from(json["data"].map((x) => Author.fromJson(x))),
+    data: List<Author>.from((json["data"] ?? []).map((x) => Author.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "success": success,
-    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+    "data": List<dynamic>.from((data ?? []).map((x) => x.toJson())),
   };
 }
 
