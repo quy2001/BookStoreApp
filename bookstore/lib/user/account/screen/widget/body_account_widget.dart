@@ -2,11 +2,10 @@ import 'package:bookstore/common/values/assets.dart';
 import 'package:bookstore/common/values/colors.dart';
 import 'package:bookstore/common/values/styles.dart';
 import 'package:bookstore/user/account/screen/edit_account_screen.dart';
-import 'package:bookstore/user/favourite/screen/favourite_screen.dart';
+import 'package:bookstore/user/account/screen/widget/list_favourite_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import '../../../../base/controller/consumer_base.dart';
-import '../../../home/screen/widget/best_seller_widget.dart';
 import '../../controller/account_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +20,10 @@ class _BodyAccountWidgetState extends State<BodyAccountWidget> {
 
   late AccountProvider accountProvider;
 
+  late String name;
+  late  String email;
+  late int id;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -31,27 +34,12 @@ class _BodyAccountWidgetState extends State<BodyAccountWidget> {
     });
   }
 
-
-  List bestSellerArr = [
-    {
-      "name": "The Dissapearance of Emila Zola",
-      "author": "Michael Rosen",
-      "img": "assets/img/1.jpg",
-      "rating": 5.0
-    },
-    {
-      "name": "Fatherhood",
-      "author": "Marcus Berkmann ",
-      "img": "assets/img/2.jpg",
-      "rating": 4.0
-    },
-    {
-      "name": "The Time Travellers Handbook",
-      "author": "Stride Lottie",
-      "img": "assets/img/3.jpg",
-      "rating": 3.0
-    },
-  ];
+  //viết thêm hàm chuyển màn để hứng giá trị trả về
+  // Future<void> _navigatorPushEdit (BuildContext context) async{
+  //   final result = Navigator.push(context, MaterialPageRoute(builder: (c)=> EditAccountScreen(name: name, email: email)));
+  //   if(!mounted) return;
+  //   print('--------data: $result');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -132,13 +120,16 @@ class _BodyAccountWidgetState extends State<BodyAccountWidget> {
                       ProgressHUD.of(context)?.dismiss();
                     });
                   }
+                  name = pro.account.name;
+                  email = pro.account.email;
+                  id = pro.account.id;
                   return Column(
                     children: [
-                      Text(pro.account.name, style: AppStyles.titleBookDetails,),
+                      Text(name, style: AppStyles.titleBookDetails,),
                       SizedBox(
                         height: 5,
                       ),
-                      Text(pro.account.email, style: AppStyles.description,),
+                      Text(email, style: AppStyles.description,),
                     ],
                   );
                 }),
@@ -149,7 +140,8 @@ class _BodyAccountWidgetState extends State<BodyAccountWidget> {
               width: size.width*0.5,
               child: ElevatedButton(
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (c)=> EditAccountScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> EditAccountScreen(name: name, email: email,)));
+                    // _navigatorPushEdit(context);
                   },
                   child: Text('Sửa tài khoản',style: TextStyle(color: Colors.white),),
                   style: ElevatedButton.styleFrom(
@@ -162,58 +154,7 @@ class _BodyAccountWidgetState extends State<BodyAccountWidget> {
             SizedBox(
               height: 30,
             ),
-            Container(
-              width: size.width,
-              padding: const EdgeInsets.only(right: 20),
-              child: Row(
-                children: [
-                  Container(
-                    width: 35,
-                    height: 35,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: Colors.redAccent.withOpacity(0.3),
-                    ),
-                    child: Icon(
-                        Icons.favorite,
-                      color: Colors.redAccent,
-                    ),
-                  ),
-                  SizedBox(width: 10,),
-                  Text(
-                    "Sách yêu thích",
-                    style: AppStyles.titleBlack,
-                    textAlign: TextAlign.start,
-                  ),
-                  Spacer(),
-                 GestureDetector(
-                   onTap: (){
-                     Navigator.push(context, MaterialPageRoute(builder: (_)=>FavouriteScreen()));
-                   },
-                   child: Row(
-                     children: [
-                       Text('Xem tất cả'),
-                       Icon(
-                           Icons.navigate_next_outlined
-                       ),
-                     ],
-                   ),
-                 )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: size.width,
-              child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(vertical: 25),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: bestSellerArr.length,
-                  itemBuilder: (context, index) {
-                    var bObj = bestSellerArr[index] as Map? ?? {};
-                    return BestSellerWidget(bObj:bObj);
-                  }
-              ),
-            ),
+            ListFavouriteWidget(),
             Divider(),
             AccountMenu(
               title: 'Thay đổi mật khẩu',

@@ -11,7 +11,7 @@ import '../favourite/screen/favourite_screen.dart';
 import '../search_book/screen/search_book_screen.dart';
 
 class MainTabScreen extends StatefulWidget {
-  const MainTabScreen({super.key});
+  MainTabScreen({super.key});
   @override
   State<MainTabScreen> createState() => _MainTabScreenState();
 }
@@ -36,6 +36,19 @@ class _MainTabScreenState extends State<MainTabScreen> {
     {"name": "Tài khoản", "icon": Icons.account_circle},
     {"name": "Đăng xuất", "icon": Icons.logout},
   ];
+
+  @override
+  void initState() {
+    sideMenuScaffoldKey = GlobalKey<ScaffoldState>();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    sideMenuScaffoldKey.currentState?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -77,49 +90,52 @@ class _MainTabScreenState extends State<MainTabScreen> {
                           : null,
                       child: GestureDetector(
                         onTap: () {
-                          if(index==1){
-                            Navigator.push(context, MaterialPageRoute(builder: (_)=>FavouriteScreen()));
-                            sideMenuScaffoldKey.currentState?.closeEndDrawer();
-                          }else if(index == 0){
-                            setState(() {
-                              currentScreen = HomeScreen();
-                              currentTab = 0;
-                            });
-                            sideMenuScaffoldKey.currentState?.closeEndDrawer();
-                          }else if(index == 2)
-                            {
+                          switch(index){
+                            case 0:
+                              setState(() {
+                                currentScreen = HomeScreen();
+                                currentTab = 0;
+                              });
+                              sideMenuScaffoldKey.currentState?.closeEndDrawer();
+                            case 1:
+                              setState(() {
+                                currentScreen = FavouriteScreen();
+                                currentTab = 5;
+                              });
+                              sideMenuScaffoldKey.currentState?.closeEndDrawer();
+                            case 2:
                               setState(() {
                                 currentScreen = BookcaseScreen();
                                 currentTab = 1;
                               });
                               sideMenuScaffoldKey.currentState?.closeEndDrawer();
-                            }
-                          else if(index == 3)
-                          {
-                            Navigator.push(context, MaterialPageRoute(builder: (_)=>AuthorScreen()));
-                            sideMenuScaffoldKey.currentState?.closeEndDrawer();
-                          }
-                          else if(index == 4)
-                          {
-                            Navigator.push(context, MaterialPageRoute(builder: (_)=>CategoryScreen()));
-                            sideMenuScaffoldKey.currentState?.closeEndDrawer();
-                          }
-                          else if(index == 5)
-                          {
-                            setState(() {
-                              currentScreen = AccountScreen();
-                              currentTab = 3;
-                            });
-                            sideMenuScaffoldKey.currentState?.closeEndDrawer();
-                          }
-                          else if(index == 6)
-                          {
+                            case 3:
 
+                              setState(() {
+                                currentScreen = AuthorScreen();
+                                currentTab = 6;
+                              });
+                              sideMenuScaffoldKey.currentState?.closeEndDrawer();
+                            case 4:
+                              setState(() {
+                                currentScreen = CategoryScreen();
+                                currentTab = 7;
+                              });
+                              sideMenuScaffoldKey.currentState?.closeEndDrawer();
+                            case 5:
+                              setState(() {
+                                currentScreen = AccountScreen();
+                                currentTab = 3;
+                              });
+                              sideMenuScaffoldKey.currentState?.closeEndDrawer();
+                            case 6:
+                              print('Đăng xuất');
                           }
                           setState(() {
                             selectMenu = index;
                           });
                         },
+
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -175,6 +191,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
         child: Container(
           height: 65,
           width: size.width,
+          color: Colors.transparent,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

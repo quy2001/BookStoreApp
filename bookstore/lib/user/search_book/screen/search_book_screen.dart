@@ -22,7 +22,7 @@ class SearchBookScreen extends StatefulWidget {
 }
 
 class _SearchBookScreenState extends State<SearchBookScreen> {
-  TextEditingController txtSearch = TextEditingController();
+  // TextEditingController txtSearch = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

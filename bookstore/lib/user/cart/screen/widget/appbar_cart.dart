@@ -84,7 +84,12 @@ class _AppBarCartWidgetState extends State<AppBarCartWidget> {
                                     color: Colors.green,fontSize: 18, fontWeight: FontWeight.w600),
                               ),
                               const TextSpan(
-                                text: ".VNĐ",
+                                text: ".000",
+                                style: TextStyle(
+                                    color: Colors.green,fontSize: 18, fontWeight: FontWeight.w600),
+                              ),
+                              const TextSpan(
+                                text: " VNĐ",
                                 style: TextStyle(
                                     color: Colors.red, fontWeight: FontWeight.w600),
                               ),

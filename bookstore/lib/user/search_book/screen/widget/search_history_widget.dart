@@ -110,12 +110,19 @@ class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
                       ),
                     ),
                       const TextSpan(
-                      text: " VNĐ",
+                      text: ".000",
                       style: TextStyle(
-                      color: Colors.red,
+                      color: Colors.green,
                       fontWeight: FontWeight.w600
                       ),
                       ),
+                    const TextSpan(
+                      text: " VNĐ",
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.w600
+                      ),
+                    ),
                   ]
                 ),
               ),
@@ -140,13 +147,13 @@ class _SearchHistoryWidgetState extends State<SearchHistoryWidget> {
                     ] ),
                     child: ElevatedButton(
                       onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (c)=> BookDetailScreen(id: widget.listBook.id, titleBook:widget.listBook.name, statusBook: bool.parse(widget.listBook.status.toString()),)));
+                            Navigator.push(context, MaterialPageRoute(builder: (c)=> BookDetailScreen(id: widget.listBook.id, titleBook:widget.listBook.name, statusBook: bool.parse(widget.listBook.status.toString()), statusFavourite: bool.parse(widget.listBook.statusFavoutite.toString()),)));
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           foregroundColor: AppColors.subTitle,
                           shadowColor: Colors.transparent),
-                      child:  const Text('Xem sách', style: TextStyle( color: AppColors.titleColor ,fontSize: 12) ,),
+                      child:  const Text('Chi tiết', style: TextStyle( color: AppColors.titleColor ,fontSize: 12) ,),
                     ),
                   )),
                   const SizedBox(width: 8,),

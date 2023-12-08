@@ -1,22 +1,21 @@
-import 'package:bookstore/user/bookcase/controller/bookcase_provider.dart';
+import 'package:bookstore/user/best_sellers/controller/best_sellers_provider.dart';
+import 'package:bookstore/user/favourite/controller/favourite_provider.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../common/values/colors.dart';
 import 'package:provider/provider.dart';
+import '../../../../common/values/colors.dart';
 
-
-class SearchBookcaseWidget extends StatefulWidget {
-  const SearchBookcaseWidget({super.key});
+class SearchBestSellerWidget extends StatefulWidget {
+  const SearchBestSellerWidget({super.key});
 
   @override
-  State<SearchBookcaseWidget> createState() => _SearchBookcaseWidgetState();
+  State<SearchBestSellerWidget> createState() => _SearchBestSellerWidgetState();
 }
-
-class _SearchBookcaseWidgetState extends State<SearchBookcaseWidget> {
+class _SearchBestSellerWidgetState extends State<SearchBestSellerWidget> {
   TextEditingController txtSearch = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final BookcaseProvider bookcaseProvider = Provider.of<BookcaseProvider>(context,listen: false);
+    final BestSellersProvider bestSellersProvider = Provider.of<BestSellersProvider>(context,listen: false);
     return Container(
       decoration: BoxDecoration(
         color: AppColors.textbox,
@@ -27,7 +26,7 @@ class _SearchBookcaseWidgetState extends State<SearchBookcaseWidget> {
         controller: txtSearch,
         onChanged: (value){
           setState(() {
-            bookcaseProvider.searchMyBook(value);
+            bestSellersProvider.searchBestSellers(value);
           });
         },
         decoration: const InputDecoration(
@@ -47,4 +46,3 @@ class _SearchBookcaseWidgetState extends State<SearchBookcaseWidget> {
     );
   }
 }
-

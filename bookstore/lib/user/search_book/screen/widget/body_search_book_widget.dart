@@ -61,95 +61,98 @@ class _BodySearchBookWidgetState extends State<BodySearchBookWidget> {
     var size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 15, top: 8, bottom: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Text('Tác giả',style: TextStyle(color: AppColors.primaryColor,fontSize: 18,fontWeight: FontWeight.w700),),
-                      SizedBox(width: 15,),
-                      Container(
-                        width: size.width *0.6,
-                        height: size.width * 0.08,
-                        padding: const EdgeInsets.all(5.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.subTitle, width: 1),
+        SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15, top: 8, bottom: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text('Tác giả',style: TextStyle(color: AppColors.primaryColor,fontSize: 18,fontWeight: FontWeight.w700),),
+                        SizedBox(width: 15,),
+                        Container(
+                          width: size.width *0.6,
+                          height: size.width * 0.08,
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: AppColors.subTitle, width: 1),
+                          ),
+                          child: Selector<AuthorProvider, Status>(
+                              builder: (context, value, child) {
+                            if (value == Status.loading) {
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                ProgressHUD.of(context)?.show();
+                              });
+                            } else if (value == Status.loaded) {
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                ProgressHUD.of(context)?.dismiss();
+                              });
+                            } else if (value == Status.error) {
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                ProgressHUD.of(context)?.dismiss();
+                              });
+                            }
+                            return buildDataAuthor(authorProvider);
+                          }, selector: (context, pro) {
+                            return pro.statusAuthor;
+                          }),
                         ),
-                        child: Selector<AuthorProvider, Status>(
-                            builder: (context, value, child) {
-                          if (value == Status.loading) {
-                            WidgetsBinding.instance.addPostFrameCallback((_) {
-                              ProgressHUD.of(context)?.show();
-                            });
-                          } else if (value == Status.loaded) {
-                            WidgetsBinding.instance.addPostFrameCallback((_) {
-                              ProgressHUD.of(context)?.dismiss();
-                            });
-                          } else if (value == Status.error) {
-                            WidgetsBinding.instance.addPostFrameCallback((_) {
-                              ProgressHUD.of(context)?.dismiss();
-                            });
-                          }
-                          return buildDataAuthor(authorProvider);
-                        }, selector: (context, pro) {
-                          return pro.statusAuthor;
-                        }),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15,),
-                  Row(
-                    children: [
-                      Text('Thể loại',style: TextStyle(color: AppColors.primaryColor,fontSize: 18,fontWeight: FontWeight.w700),),
-                      SizedBox(width: 10,),
-                      Container(
-                        width: size.width * 0.6,
-                        height: size.width * 0.08,
-                        padding: const EdgeInsets.all(5.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppColors.subTitle, width: 1),
+                      ],
+                    ),
+                    SizedBox(height: 15,),
+                    Row(
+                      children: [
+                        Text('Thể loại',style: TextStyle(color: AppColors.primaryColor,fontSize: 18,fontWeight: FontWeight.w700),),
+                        SizedBox(width: 10,),
+                        Container(
+                          width: size.width * 0.6,
+                          height: size.width * 0.08,
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: AppColors.subTitle, width: 1),
+                          ),
+                          child: Selector<CategoryProvider, Status>(
+                              builder: (context, value, child) {
+                                if(value==Status.loading){
+                                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                                    ProgressHUD.of(context)?.show();
+                                  });
+                                }else if ( value == Status.loaded){
+                                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                                    ProgressHUD.of(context)?.dismiss();
+                                  });
+                                }else if (value == Status.error) {
+                                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                                    ProgressHUD.of(context)?.dismiss();
+                                  });
+                                }
+                                return buildDataCategory(categoryProvider);
+                              },
+                              selector: (context, pro) {
+                                return pro.statusCategory;
+                              })
                         ),
-                        child: Selector<CategoryProvider, Status>(
-                            builder: (context, value, child) {
-                              if(value==Status.loading){
-                                WidgetsBinding.instance.addPostFrameCallback((_) {
-                                  ProgressHUD.of(context)?.show();
-                                });
-                              }else if ( value == Status.loaded){
-                                WidgetsBinding.instance.addPostFrameCallback((_) {
-                                  ProgressHUD.of(context)?.dismiss();
-                                });
-                              }else if (value == Status.error) {
-                                WidgetsBinding.instance.addPostFrameCallback((_) {
-                                  ProgressHUD.of(context)?.dismiss();
-                                });
-                              }
-                              return buildDataCategory(categoryProvider);
-                            },
-                            selector: (context, pro) {
-                              return pro.statusCategory;
-                            })
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: size.width * 0.02,
-              ),
-              IconButton(
-                  onPressed: () {
-                    searchBookProvider.searchAuthCate(valueAuthor, valueCategory);
-                  }, icon: Icon(Icons.filter_alt_outlined,size: 35,))
-            ],
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: size.width * 0.02,
+                ),
+                IconButton(
+                    onPressed: () {
+                      searchBookProvider.searchAuthCate(valueAuthor, valueCategory);
+                    }, icon: Icon(Icons.filter_alt_outlined,size: 35,))
+              ],
+            ),
           ),
         ),
         //lấy danh sách các sách
@@ -166,13 +169,14 @@ class _BodySearchBookWidgetState extends State<BodySearchBookWidget> {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               ProgressHUD.of(context)?.dismiss();
             });
-          } else if (value == Status.noData) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              ProgressHUD.of(context)?.dismiss();
-            });
-            //nếu k có sách thì hiển thị hàm hình k có dữ liệu
-            return Text('Không có dữ liệu');
           }
+          // else if (value == Status.noData) {
+          //   WidgetsBinding.instance.addPostFrameCallback((_) {
+          //     ProgressHUD.of(context)?.dismiss();
+          //   });
+          //   //nếu k có sách thì hiển thị hàm hình k có dữ liệu
+          //   return Text('Không có dữ liệu');
+          // }
           return buildData(searchBookProvider);
         }, selector: (context, pro) {
           return pro.statusBook;

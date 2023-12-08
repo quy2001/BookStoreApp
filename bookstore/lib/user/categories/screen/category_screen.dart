@@ -23,7 +23,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       ],
       child: AppBarWidget(
         tittle: Text('Thể loại'),
-          haveBackButton: true,
+          haveMenuButton: true,
           child: BodyCategoryWidget()),
     );
   }

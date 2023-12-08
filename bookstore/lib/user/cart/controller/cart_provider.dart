@@ -27,13 +27,12 @@ class CartProvider extends BaseProvider<CartServices> {
           title: 'Thông báo',
           icon: AppAssets.icoDialogSuccess,
           cancelButton: false,
-          content: 'Thêm vào giỏ hàng thành công?',
+          content: 'Thêm vào giỏ hàng thành công',
         );
       }
       );
     }on DioException catch (e) {
-      messagesError = e.message ?? 'Co loi he thong';
-
+      messagesError = e.message ?? 'Có lỗi hệ thống';
       receivedError();
       showDialog(context: context, builder: (context){
         return DialogWidget(

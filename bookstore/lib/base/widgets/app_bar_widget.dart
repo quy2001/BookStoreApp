@@ -6,7 +6,7 @@ import '../../user/main_tab/main_tab_screen.dart';
 import 'button_widget.dart';
 
 class AppBarWidget extends StatelessWidget {
-  const AppBarWidget(
+  AppBarWidget(
       {super.key,
       required this.child,
       this.tittle,
@@ -14,7 +14,9 @@ class AppBarWidget extends StatelessWidget {
       this.haveBottomButton,
       this.functionBottomButton,
       this.tittleButton,
-      this.haveMenuButton});
+      this.haveMenuButton,
+      // this.valueBack
+      });
 
   final Widget child;
   final Widget? tittle;
@@ -22,6 +24,7 @@ class AppBarWidget extends StatelessWidget {
   final bool? haveBackButton;
   final bool? haveMenuButton;
   final bool? haveBottomButton;
+  // final Object? valueBack;
   final Function()? functionBottomButton;
 
   @override
@@ -38,10 +41,15 @@ class AppBarWidget extends StatelessWidget {
           haveMenuButton == true
               ? IconButton(
                   onPressed: () {
-                    sideMenuScaffoldKey.currentState?.openEndDrawer();
+                    sideMenuScaffoldKey?.currentState?.openEndDrawer();
                   },
                   icon: Icon(Icons.menu))
-              : const SizedBox(),
+              : SizedBox()
+          // : IconButton(
+          // onPressed: () {
+          //   Navigator.push(context, MaterialPageRoute(builder: (c)=>MainTabScreen()));
+          // },
+          // icon: Icon(Icons.home_rounded, size: 35,))
         ],
         leading: haveBackButton == true
             ? BackButton(

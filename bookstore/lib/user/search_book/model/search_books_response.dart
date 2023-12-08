@@ -40,6 +40,7 @@ class SearchBook {
   String cname;
   String aname;
   String status;
+  String statusFavoutite;
 
   SearchBook({
     required this.id,
@@ -53,6 +54,7 @@ class SearchBook {
     required this.cname,
     required this.aname,
     required this.status,
+    required this.statusFavoutite,
   });
 
   factory SearchBook.fromJson(Map<String, dynamic> json) => SearchBook(
@@ -67,6 +69,7 @@ class SearchBook {
     cname: json["cname"],
     aname: json["aname"],
     status: json["status"],
+    statusFavoutite: json["statusFavoutite"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -81,5 +84,6 @@ class SearchBook {
     "cname": cname,
     "aname": aname,
     "status": status,
+    "statusFavoutite": statusFavoutite,
   };
 }

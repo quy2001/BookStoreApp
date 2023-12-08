@@ -1,4 +1,5 @@
 import 'package:bookstore/base/widgets/app_bar_widget.dart';
+import 'package:bookstore/user/favourite/screen/widget/body_favourite_widget.dart';
 import 'package:flutter/material.dart';
 
 class FavouriteScreen extends StatefulWidget {
@@ -12,8 +13,9 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   Widget build(BuildContext context) {
     return AppBarWidget(
-      haveBackButton: true,
+      // haveBackButton: true,
+      haveMenuButton: true,
         tittle: Text('Sách yêu thích'),
-        child: Container());
+        child: BodyFavouriteWidget());
   }
 }

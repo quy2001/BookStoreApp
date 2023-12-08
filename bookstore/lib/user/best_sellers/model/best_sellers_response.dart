@@ -1,25 +1,25 @@
 // To parse this JSON data, do
 //
-//     final bookcaseResponse = bookcaseResponseFromJson(jsonString);
+//     final bestSellerResponse = bestSellerResponseFromJson(jsonString);
 
 import 'dart:convert';
 
-BookcaseResponse bookcaseResponseFromJson(String str) => BookcaseResponse.fromJson(json.decode(str));
+BestSellersResponse bestSellerResponseFromJson(String str) => BestSellersResponse.fromJson(json.decode(str));
 
-String bookcaseResponseToJson(BookcaseResponse data) => json.encode(data.toJson());
+String bestSellersResponseToJson(BestSellersResponse data) => json.encode(data.toJson());
 
-class BookcaseResponse {
+class BestSellersResponse {
   int success;
-  List<Bookcase>? data;
+  List<BestSellers>? data;
 
-  BookcaseResponse({
+  BestSellersResponse({
     required this.success,
     required this.data,
   });
 
-  factory BookcaseResponse.fromJson(Map<String, dynamic> json) => BookcaseResponse(
+  factory BestSellersResponse.fromJson(Map<String, dynamic> json) => BestSellersResponse(
     success: json["success"],
-    data: List<Bookcase>.from((json["data"] ?? []).map((x) => Bookcase.fromJson(x))),
+    data: List<BestSellers>.from((json["data"] ?? []).map((x) => BestSellers.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -28,46 +28,42 @@ class BookcaseResponse {
   };
 }
 
-class Bookcase {
-  int id;
-  int idUser;
+class BestSellers {
   int idBook;
-  String status;
+  int tongBan;
   String bname;
   int bprice;
   String bimage;
+  String status;
   String statusFavourite;
 
-  Bookcase({
-    required this.id,
-    required this.idUser,
+  BestSellers({
     required this.idBook,
-    required this.status,
+    required this.tongBan,
     required this.bname,
     required this.bprice,
     required this.bimage,
+    required this.status,
     required this.statusFavourite,
   });
 
-  factory Bookcase.fromJson(Map<String, dynamic> json) => Bookcase(
-    id: json["id"],
-    idUser: json["idUser"],
+  factory BestSellers.fromJson(Map<String, dynamic> json) => BestSellers(
     idBook: json["idBook"],
-    status: json["status"],
+    tongBan: json["tongBan"],
     bname: json["bname"],
     bprice: json["bprice"],
     bimage: json["bimage"],
+    status: json["status"],
     statusFavourite: json["statusFavourite"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "idUser": idUser,
     "idBook": idBook,
-    "status": status,
+    "tongBan": tongBan,
     "bname": bname,
     "bprice": bprice,
     "bimage": bimage,
+    "status": status,
     "statusFavourite": statusFavourite,
   };
 }

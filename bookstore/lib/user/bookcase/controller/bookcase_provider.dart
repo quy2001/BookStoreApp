@@ -10,6 +10,19 @@ class BookcaseProvider extends BaseProvider<BookcaseServices> {
   late List<Bookcase> listBookcase = [];
   String name ='';
   Status statusBookCase = Status.none;
+
+  void searchMyBook(String nameSearch){
+    if(nameSearch != ''){
+      name = nameSearch;
+      listBookcase = [];
+      getListBookcase();
+    }else {
+      name = '';
+      listBookcase = [];
+      getListBookcase();
+    }
+  }
+
   Future<void> getListBookcase() async{
     resetStatus();
     try{

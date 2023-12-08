@@ -23,7 +23,7 @@ class _AuthorScreenState extends State<AuthorScreen> {
       ],
       child: AppBarWidget(
         tittle: Text('Tác giả'),
-          haveBackButton: true,
+          haveMenuButton: true,
           child: BodyAuthorWidget()
       ),
     );

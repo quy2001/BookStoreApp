@@ -17,12 +17,11 @@ class MyApp extends StatelessWidget {
       title: 'Book Store',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          //colorScheme: ColorScheme.fromSeed(seedColor:AppColors.primaryColor),
        primaryColor: AppColors.primaryColor,
        fontFamily: 'SF Pro Text'
       ),
       home: const OnboardingScreen(),
-      // home: const MainTabScreen(),
+      // home: MainTabScreen(),
     );
   }
 }

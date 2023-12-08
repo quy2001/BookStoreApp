@@ -79,20 +79,21 @@ class SearchBookProvider extends BaseProvider<SearchBookServices>{
       if(listBook.length < 5){
         canLoadMore = false;
       }
-      if (listBook.isNotEmpty) {
+      // if (listBook.isNotEmpty) {
         finishLoading(() {
           statusBook = Status.loaded;
         });
-      } else {
-        receivedNoData(() {
-          statusBook = Status.noData;
-        });
-      }
+      // } else {
+      //   receivedNoData(() {
+      //     statusBook = Status.noData;
+      //   });
+      // }
     }on DioException catch (e){
-      messagesError = e.message ?? 'Co loi he thong';
+      messagesError = e.message ?? 'Có lỗi hệ thống';
       receivedError(() {
         statusBook = Status.error;
       });
+      canLoadMore = false;
     }
   }
 }

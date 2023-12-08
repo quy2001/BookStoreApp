@@ -13,38 +13,6 @@ class BodyBookcaseWidget extends StatefulWidget {
 }
 
 class _BodyBookcaseWidgetState extends State<BodyBookcaseWidget> {
-
-  // List searchArr = [
-  //   {
-  //     "name": "Biography dsfdsf afdaf afasdfa fadf ",
-  //     "img": "assets/img/1.jpg",
-  //   },
-  //   {
-  //     "name": "Tôi là bê tô",
-  //     "img": "assets/img/toi_la_be_to.jpg",
-  //   },
-  //   {
-  //     "name": "Children",
-  //     "img": "assets/img/3.jpg",
-  //   },
-  //   {
-  //     "name": "Bơ đi mà sống",
-  //     "img": "assets/img/bo_di_ma_song.jpg",
-  //   },
-  //   {
-  //     "name": "Business",
-  //     "img": "assets/img/2.jpg",
-  //   },
-  //   {
-  //     "name": "Tôi là bê tô",
-  //     "img": "assets/img/toi_la_be_to.jpg",
-  //   },
-  //   {
-  //     "name": "Business",
-  //     "img": "assets/img/2.jpg",
-  //   },
-  // ];
-
   late BookcaseProvider bookcaseProvider;
 
   @override
