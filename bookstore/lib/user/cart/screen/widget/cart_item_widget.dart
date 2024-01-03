@@ -13,27 +13,16 @@ class CartItemWidget extends StatefulWidget {
   const CartItemWidget(
       {super.key,
       required this.listCart,
-      required this.id,
-      required this.isSelected,
-      required this.onSelectionChanged});
+      required this.id
+      });
 
   final Cart listCart;
   final int id;
-  final bool isSelected;
-  final Function(bool) onSelectionChanged;
   @override
   State<CartItemWidget> createState() => _CartItemWidgetState();
 }
 
 class _CartItemWidgetState extends State<CartItemWidget> {
-  bool _isSelected = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _isSelected = widget.isSelected;
-  }
-
   late CartProvider cartProvider;
 
   void deletCart() {
@@ -77,26 +66,11 @@ class _CartItemWidgetState extends State<CartItemWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        widget.listCart.bname,
-                        maxLines: 2,
-                        textAlign: TextAlign.left,
-                        style: AppStyles.titleBook,
-                      ),
-                    ),
-                    Checkbox(
-                        value: _isSelected,
-                        activeColor: AppColors.primaryColor,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            _isSelected = value ?? false;
-                            widget.onSelectionChanged(_isSelected);
-                          });
-                        }),
-                  ],
+                Text(
+                  widget.listCart.bname,
+                  maxLines: 2,
+                  textAlign: TextAlign.left,
+                  style: AppStyles.titleBook,
                 ),
                 const SizedBox(
                   height: 8,
@@ -183,7 +157,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                               );
                             });
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.delete,
                         color: Colors.red,
                       ),

@@ -1,5 +1,4 @@
 import 'package:bookstore/user/best_sellers/controller/best_sellers_provider.dart';
-import 'package:bookstore/user/favourite/controller/favourite_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../common/values/colors.dart';

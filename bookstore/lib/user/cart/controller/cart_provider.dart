@@ -13,6 +13,14 @@ class CartProvider extends BaseProvider<CartServices> {
   late String messageDele = '';
   late List<Cart> listCart = [];
 
+  totalPrice(){
+    int total = 0;
+    for (int i = 0; i < listCart.length; i++){
+      total = total + listCart[i].bprice;
+    }
+    return total;
+  }
+
   //tra ve thong bao them thanh cong
   Future<void> addCart(BuildContext context,int idBook,) async {
     resetStatus();
@@ -21,16 +29,17 @@ class CartProvider extends BaseProvider<CartServices> {
       var keyidUser = await SecureStorage().read('idUser');
       message = await service.postAddCart(
           request: CartRequest(idUser: int.parse(keyidUser) , idBook: idBook, status: false));
-      finishLoading();
-      showDialog(context: context, builder: (context){
-        return DialogWidget(
-          title: 'Thông báo',
-          icon: AppAssets.icoDialogSuccess,
-          cancelButton: false,
-          content: 'Thêm vào giỏ hàng thành công',
+      finishLoading((){
+        showDialog(context: context, builder: (context){
+          return DialogWidget(
+            title: 'Thông báo',
+            icon: AppAssets.icoDialogSuccess,
+            cancelButton: false,
+            content: 'Thêm vào giỏ hàng thành công',
+          );
+        }
         );
-      }
-      );
+      });
     }on DioException catch (e) {
       messagesError = e.message ?? 'Có lỗi hệ thống';
       receivedError();
@@ -58,7 +67,7 @@ class CartProvider extends BaseProvider<CartServices> {
         finishLoading();
       }
     }on DioException catch (e){
-      messagesError = e.message ?? 'Co loi he thong';
+      messagesError = e.message ?? 'Có lỗi hệ thống';
       receivedError();
     }
   }

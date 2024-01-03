@@ -26,7 +26,7 @@ class FavouriteProvider extends BaseProvider<FavouriteServices> {
       message = await service.postFavourite(request: FavouriteRequest(idUser: int.parse(keyidUser), idBook: idBook));
       finishLoading();
     }on DioException catch (e) {
-      messagesError = e.message ?? 'Co loi he thong';
+      messagesError = e.message ?? 'Có lỗi hệ thống';
       receivedError();
     }
   }

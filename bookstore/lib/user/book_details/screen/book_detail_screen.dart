@@ -35,7 +35,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       child: AppBarWidget(
         haveBottomButton:widget.statusBook == true ? true : false,
         tittleButton: 'Sách nói' ,
-        functionBottomButton: (){},
+        functionBottomButton: (){
+
+        },
         tittle: Text(widget.titleBook),
           haveBackButton: true,
           child: BodyBookDetailWidget(id: widget.id, statusBook: widget.statusBook, statusFavourite: widget.statusFavourite,)

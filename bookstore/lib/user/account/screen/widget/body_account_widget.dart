@@ -1,10 +1,13 @@
+import 'package:bookstore/base/widgets/dialog_widget.dart';
 import 'package:bookstore/common/values/assets.dart';
 import 'package:bookstore/common/values/colors.dart';
 import 'package:bookstore/common/values/styles.dart';
 import 'package:bookstore/user/account/screen/edit_account_screen.dart';
 import 'package:bookstore/user/account/screen/widget/list_favourite_widget.dart';
+import 'package:bookstore/user/login_user/screen/login_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../base/controller/consumer_base.dart';
 import '../../controller/account_provider.dart';
 import 'package:provider/provider.dart';
@@ -162,10 +165,34 @@ class _BodyAccountWidgetState extends State<BodyAccountWidget> {
               functionAccountMenu: (){},
               endIcon: false,
             ),
-            AccountMenu(
-              title: 'Đăng xuất',
-              icon: Icons.logout,
-              functionAccountMenu: (){},
+            GestureDetector(
+              onTap: () {
+                //hiển thị thông báo đăng xuất
+                showDialog(
+                    context: context,
+                    builder: (context){
+                      return DialogWidget(
+                        title: 'Thông báo',
+                        icon: AppAssets.icoDialogNotice,
+                        cancelButton: true,
+                        content: 'Bạn có muốn đăng xuất?',
+                        function: () async {
+                          //xóa token
+                          final prefs = await SharedPreferences.getInstance();
+                          prefs.remove('token');
+                          //chuyển qua trang login
+                          Navigator.pushReplacement(
+                              context, MaterialPageRoute(builder: (_) => LoginUserScreen()));
+                        },
+                      );
+                    }
+                );
+              },
+              child: AccountMenu(
+                title: 'Đăng xuất',
+                icon: Icons.logout,
+                functionAccountMenu: (){},
+              ),
             ),
           ],
         ),

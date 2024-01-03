@@ -17,19 +17,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   List pageArr = [
     {
-      "title": "Discounted\nSecondhand Books",
-      "sub_title": "Used and near new secondhand books at great prices.",
+      "title": "CHÀO MỪNG\nđến với ứng dụng đọc sách online",
+      "sub_title": "Thế giới từ trang sách mở ra, chỉ cần một cú click từ bạn.",
       "img": AppAssets.imgOn1,
     },
     {
-      "title": "20 Book Grocers\nNationally",
-      "sub_title": "We've successfully opened 20 stores across Australia.",
+      "title": "Tiện ích\nTruy cập linh hoạt",
+      "sub_title": "Tất cả những gì bạn cần là một màn hình, để khám phá vô tận vũ trụ sách văn.",
       "img": AppAssets.imgOn2,
     },
     {
-      "title": "Sell or Recycle Your Old\nBooks With Us",
+      "title": "Cập nhật đầu sách mới\nĐa dạng thể loại",
       "sub_title":
-          "If you're looking to downsize, sell or recycle old books, the Book Grocer can help.",
+          "Nơi mọi trang sách sống động, mỗi click là một cánh cửa mở ra tri thức.",
       "img": AppAssets.imgOn3,
     },
   ];
@@ -113,7 +113,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       builder: (context) => const LoginUserScreen()));
                             },
                             child: const Text(
-                              "Skip",
+                              "Bỏ qua",
                               style: TextStyle(
                                   color: AppColors.primaryColor,
                                   fontSize: 20,
@@ -148,7 +148,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               }
                             },
                             child: Text(
-                              page!=2 ? "Next" : "Get started",
+                              page!=2 ? "Tiếp" : "Bắt đầu",
                               style: const TextStyle(
                                   color: AppColors.primaryColor, fontSize: 20, fontWeight: FontWeight.w600),
                             )),

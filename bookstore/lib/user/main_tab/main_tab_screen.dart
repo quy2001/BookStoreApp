@@ -1,13 +1,17 @@
 import 'package:bookstore/common/values/colors.dart';
 import 'package:bookstore/user/home/screen/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../base/widgets/dialog_widget.dart';
+import '../../common/values/assets.dart';
 import '../account/screen/account_screen.dart';
 import '../authors/screen/author_screen.dart';
 import '../bookcase/screen/bookcase_screen.dart';
 import '../cart/screen/cart_screen.dart';
 import '../categories/screen/category_screen.dart';
 import '../favourite/screen/favourite_screen.dart';
+import '../login_user/screen/login_user_screen.dart';
 import '../search_book/screen/search_book_screen.dart';
 
 class MainTabScreen extends StatefulWidget {
@@ -129,7 +133,26 @@ class _MainTabScreenState extends State<MainTabScreen> {
                               });
                               sideMenuScaffoldKey.currentState?.closeEndDrawer();
                             case 6:
-                              print('Đăng xuất');
+                              showDialog(
+                                  context: context,
+                                  builder: (context){
+                                    return DialogWidget(
+                                      title: 'Thông báo',
+                                      icon: AppAssets.icoDialogNotice,
+                                      cancelButton: true,
+                                      content: 'Bạn có muốn đăng xuất?',
+                                      function: () async {
+                                        //xóa token
+                                        final prefs = await SharedPreferences.getInstance();
+                                        prefs.remove('token');
+                                        //chuyển qua trang login
+                                        Navigator.pushReplacement(
+                                            context, MaterialPageRoute(builder: (_) => LoginUserScreen()));
+                                      },
+                                    );
+                                  }
+                              );
+                              // currentTab = 8;
                           }
                           setState(() {
                             selectMenu = index;

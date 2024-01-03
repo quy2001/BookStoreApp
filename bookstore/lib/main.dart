@@ -1,6 +1,5 @@
 import 'package:bookstore/common/values/colors.dart';
 import 'package:bookstore/onboarding/screen/onboarding_screen.dart';
-import 'package:bookstore/user/main_tab/main_tab_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,7 +20,6 @@ class MyApp extends StatelessWidget {
        fontFamily: 'SF Pro Text'
       ),
       home: const OnboardingScreen(),
-      // home: MainTabScreen(),
     );
   }
 }
