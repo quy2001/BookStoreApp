@@ -80,8 +80,8 @@ class _TopPicksWidgetState extends State<TopPicksWidget> {
           return TopPickItemWidge(listBook: topPickProvider.listBookDisplay[itemIndex],);
         },
         options: CarouselOptions(
-          autoPlay: false,
-          // autoPlayInterval: const Duration(seconds: 3),
+          autoPlay: true,
+          autoPlayInterval: const Duration(seconds: 3),
           aspectRatio: 1,
           enlargeCenterPage: true,
           viewportFraction: 0.45,

@@ -77,9 +77,12 @@ class _ListFavouriteWidgetState extends State<ListFavouriteWidget> {
             },
             onRepositoryNoData: (req) {
               return const Center(
-                child: Text(
-                  'Không có dữ liệu',
-                  style: TextStyle(fontSize: 14, color: Colors.black),
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text(
+                    'Không có sách yêu thích',
+                    style: TextStyle(fontSize: 14, color: Colors.black),
+                  ),
                 ),
               );
             },

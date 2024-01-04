@@ -56,6 +56,7 @@ class _FavouriteItemState extends State<FavouriteItem> {
               textAlign: TextAlign.left,
               style: AppStyles.titleBook,
             ),
+
           ],
         ),
       ),
