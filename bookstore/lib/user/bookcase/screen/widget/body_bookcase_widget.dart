@@ -5,6 +5,8 @@ import 'package:bookstore/user/bookcase/screen/widget/search_bookcase_widget.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:provider/provider.dart';
+
+import '../../../../common/values/colors.dart';
 class BodyBookcaseWidget extends StatefulWidget {
   const BodyBookcaseWidget({super.key});
 
@@ -50,7 +52,25 @@ class _BodyBookcaseWidgetState extends State<BodyBookcaseWidget> {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 ProgressHUD.of(context)?.dismiss();
               });
-              return Text('Không có dữ liệu');
+              return Expanded(
+                  child: Container(
+                    width: double.infinity,
+                      height: double.infinity,
+                      child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 170,
+                                height: 170,
+                                child: Image.asset('assets/img/no_bookcase.png',fit: BoxFit.contain,),
+                              ),
+                              Text('tủ sách rỗng',style: TextStyle(fontSize: 20,color: AppColors.primaryColor, fontWeight: FontWeight.w600),)
+                            ],
+                          )
+                      )
+                  )
+              );
             }
             return buildData(bookcaseProvider);
           }, selector: (context,pro){

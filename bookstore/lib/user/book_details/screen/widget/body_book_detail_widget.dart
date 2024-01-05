@@ -180,7 +180,7 @@ class _BodyBookDetailWidgetState extends State<BodyBookDetailWidget> {
                           ]),
                     ),
                     const SizedBox(
-                      height: 25,
+                      height: 5,
                     ),
                     widget.statusBook == true
                         ? Row(
